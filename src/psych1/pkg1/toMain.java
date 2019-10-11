@@ -37,6 +37,7 @@ public class toMain extends JPanel implements ActionListener{
         if(clicked == toMenuButton){
             SwingUtilities.invokeLater(new Runnable(){
             public void run() {
+                setVisible(false);
                 new MainMenu();    
             }
             });

@@ -24,21 +24,22 @@ import javax.swing.SwingUtilities;
  */
 public class MainMenu extends JFrame{
     
-    JPanelLeft jPanel2;
-    JPanelRight jPanel;
+    private jPanelLeft jPanelL;
+    private jPanelRight jPanelR;
     
     public MainMenu(){
         super("MINDCRAFT"); 
         
         
         setLayout(new BorderLayout());
-
-        jPanel2 = new JPanelLeft();
-        jPanel = new JPanelRight();
-        add(jPanel2, BorderLayout.CENTER);
-        jPanel2.setPreferredSize(new Dimension(300, 300));
-        add(jPanel, BorderLayout.EAST);
-        jPanel.setPreferredSize(new Dimension(300, 300));
+        
+        jPanelL = new jPanelLeft();
+        jPanelR = new jPanelRight();
+        add(jPanelL, BorderLayout.CENTER);
+        jPanelL.setPreferredSize(new Dimension(300, 300));
+        add(jPanelR, BorderLayout.EAST);
+        jPanelR.setPreferredSize(new Dimension(300, 300));
+        remove(jPanelL);
         
         
         setSize(600,600);
@@ -46,14 +47,13 @@ public class MainMenu extends JFrame{
         setVisible(true);
     }   
     
-}
 
-class JPanelLeft extends JPanel {
+class jPanelLeft extends JPanel {
     
     private JLabel jTitle;
     
     
-    JPanelLeft (){
+    jPanelLeft (){
         jTitle = new JLabel("MindCraft", JLabel.CENTER);
         
         setLayout(new BorderLayout());
@@ -64,14 +64,14 @@ class JPanelLeft extends JPanel {
     
 }
 
-class JPanelRight extends JPanel implements ActionListener{
+class jPanelRight extends JPanel implements ActionListener{
 
     private JButton start;
     private JButton about;
     private JButton instructions;
     private JButton reviewer;
     
-    JPanelRight() {
+    jPanelRight() {
         start = new JButton("START");
         about = new JButton("ABOUT");
         instructions = new JButton("INSTRUCTIONS");
@@ -91,9 +91,6 @@ class JPanelRight extends JPanel implements ActionListener{
         add(reviewer);
     }
     
-    
-    
-    
     @Override
     public void actionPerformed(ActionEvent e) {
         
@@ -101,11 +98,17 @@ class JPanelRight extends JPanel implements ActionListener{
         
         if(clicked == start){
             
-            SwingUtilities.invokeLater(new Runnable(){
-            public void run() {
-                new Start();    
-            }
-            });
+            add(jPanelL, BorderLayout.CENTER);
+            jPanelL.setPreferredSize(new Dimension(300, 300));
+            
+            repaint();
+            revalidate();
+            
+//            SwingUtilities.invokeLater(new Runnable(){
+//            public void run() {
+//                new About();
+//            }
+//            });
             
         }else if(clicked == about){
             
@@ -117,7 +120,7 @@ class JPanelRight extends JPanel implements ActionListener{
             });
             
         }else if(clicked == instructions){
-                
+
             SwingUtilities.invokeLater(new Runnable(){
             public void run() {
                 new Instructions();
@@ -126,10 +129,9 @@ class JPanelRight extends JPanel implements ActionListener{
             });
             
         }else if(clicked == reviewer){
-            
+
             SwingUtilities.invokeLater(new Runnable(){
             public void run() {
-                new Reviewer();
                 
             }
             });
@@ -141,4 +143,5 @@ class JPanelRight extends JPanel implements ActionListener{
         
     }
     
+}
 }
