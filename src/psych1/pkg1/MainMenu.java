@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -23,26 +24,19 @@ import javax.swing.SwingUtilities;
  */
 public class MainMenu extends JFrame{
     
-    TextPanel1 textPanel;
+    JPanelLeft jPanel2;
     JPanelRight jPanel;
-    /*
-    private toMain toolbar;
     
-    toolbar = new toMain();
-    
-    add(toolbar, BorderLayout.SOUTH);
-    */
     public MainMenu(){
         super("MINDCRAFT"); 
         
         
         setLayout(new BorderLayout());
 
-        textPanel = new TextPanel1();
+        jPanel2 = new JPanelLeft();
         jPanel = new JPanelRight();
-        
-        add(textPanel, BorderLayout.CENTER);
-        textPanel.setPreferredSize(new Dimension(300, 300));
+        add(jPanel2, BorderLayout.CENTER);
+        jPanel2.setPreferredSize(new Dimension(300, 300));
         add(jPanel, BorderLayout.EAST);
         jPanel.setPreferredSize(new Dimension(300, 300));
         
@@ -54,21 +48,20 @@ public class MainMenu extends JFrame{
     
 }
 
-class TextPanel1 extends JPanel {
+class JPanelLeft extends JPanel {
     
-    private JTextArea textArea;
+    private JLabel jTitle;
     
-    public TextPanel1(){
-        textArea = new JTextArea();
+    
+    JPanelLeft (){
+        jTitle = new JLabel("MindCraft", JLabel.CENTER);
         
         setLayout(new BorderLayout());
         
-        add(new JScrollPane(textArea), BorderLayout.CENTER);
+        add(jTitle, BorderLayout.CENTER);
     }
     
-    public void appendText (String text){
-        textArea.append(text);
-    }
+    
 }
 
 class JPanelRight extends JPanel implements ActionListener{
