@@ -7,12 +7,13 @@ package psych1.pkg1;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Gavin Nigel Chuacuco
  */
-public class Start extends JFrame{
+public class Start extends JPanel{
 
     private toMain toolbar;
     /*
@@ -23,8 +24,10 @@ public class Start extends JFrame{
     add(toolbar, BorderLayout.SOUTH);
     */
     public Start(){
-        super("START");
-        
+//        removeAll();
+//        repaint();
+//        revalidate();
+
         setLayout(new BorderLayout());
         
         toolbar = new toMain();
@@ -32,7 +35,7 @@ public class Start extends JFrame{
         add(toolbar, BorderLayout.SOUTH);
         
         setSize(600,600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         
     }
