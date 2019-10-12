@@ -20,6 +20,7 @@ import javax.swing.SwingUtilities;
 public class toMain extends JPanel implements ActionListener{
     
     private JButton toMenuButton;
+    //private jPanelRight jPanelR;
     
     public toMain(){
         toMenuButton = new JButton("MAIN MENU");       
@@ -34,13 +35,11 @@ public class toMain extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         JButton clicked = (JButton)e.getSource();
         
-        if(clicked == toMenuButton){
-            SwingUtilities.invokeLater(new Runnable(){
-            public void run() {
-                setVisible(false);
-                new MainMenu();    
-            }
-            });
+        if(clicked == toMenuButton){            
+
+              System.out.println("IT REACHED TO MAIN MENU BUTTON");
+              removeAll();
+              
             
         }
     

@@ -6,6 +6,7 @@
 package psych1.pkg1;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,49 +23,59 @@ import javax.swing.SwingUtilities;
  *
  * @author Gavin Nigel Chuacuco
  */
-public class MainMenu extends JFrame{
+public class MainMenu extends JFrame implements ActionListener{
     
     private jPanelLeft jPanelL;
     private jPanelRight jPanelR;
+    private Start jPanelStart;
+    private About jPanelAbout;
+    private Instructions jPanelInstructions;
+    private Reviewer jPanelReviewer;
     
     public MainMenu(){
         super("MINDCRAFT"); 
-        
-        
         setLayout(new BorderLayout());
         
         jPanelL = new jPanelLeft();
         jPanelR = new jPanelRight();
-        add(jPanelL, BorderLayout.CENTER);
+       
+        add(jPanelL, BorderLayout.WEST);
         jPanelL.setPreferredSize(new Dimension(300, 300));
-        add(jPanelR, BorderLayout.EAST);
-        jPanelR.setPreferredSize(new Dimension(300, 300));
-        remove(jPanelL);
+        jPanelL.setBackground(Color.cyan);
         
+        add(jPanelR, BorderLayout.CENTER);
+        jPanelR.setPreferredSize(new Dimension(300, 300));
+        jPanelR.setBackground(Color.GRAY);
+        
+        jPanelR.removeAll();
+        add(jPanelR, BorderLayout.CENTER);
+        repaint();
+        revalidate();
         
         setSize(600,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }   
     
-
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 class jPanelLeft extends JPanel {
     
-    private JLabel jTitle;
-    
+    public JLabel jTitle;
     
     jPanelLeft (){
-        jTitle = new JLabel("MindCraft", JLabel.CENTER);
-        
         setLayout(new BorderLayout());
+        jTitle = new JLabel("MindCraft", JLabel.CENTER);
         
         add(jTitle, BorderLayout.CENTER);
     }
     
-    
 }
 
-class jPanelRight extends JPanel implements ActionListener{
+public class jPanelRight extends JPanel implements ActionListener{
 
     private JButton start;
     private JButton about;
@@ -82,13 +93,13 @@ class jPanelRight extends JPanel implements ActionListener{
         instructions.addActionListener(this);
         reviewer.addActionListener(this);
         
-        
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));        
         
         add(start);
         add(about);
         add(instructions);
         add(reviewer);
+
     }
     
     @Override
@@ -98,43 +109,41 @@ class jPanelRight extends JPanel implements ActionListener{
         
         if(clicked == start){
             
-            add(jPanelL, BorderLayout.CENTER);
-            jPanelL.setPreferredSize(new Dimension(300, 300));
-            
+            jPanelStart = new Start();
+            jPanelL.setPreferredSize(new Dimension(100, 300));
+            jPanelR.removeAll();
+            add(jPanelStart, BorderLayout.CENTER);
             repaint();
             revalidate();
             
-//            SwingUtilities.invokeLater(new Runnable(){
-//            public void run() {
-//                new About();
-//            }
-//            });
-            
         }else if(clicked == about){
             
-            SwingUtilities.invokeLater(new Runnable(){
-            public void run() {
-                new About();
-                
-            }
-            });
+            jPanelAbout = new About();
+            jPanelL.setPreferredSize(new Dimension(100, 300));
+            jPanelR.removeAll();
+            add(jPanelAbout, BorderLayout.CENTER);
+            repaint();
+            revalidate();
+            
+
             
         }else if(clicked == instructions){
-
-            SwingUtilities.invokeLater(new Runnable(){
-            public void run() {
-                new Instructions();
-                
-            }
-            });
+            
+            jPanelInstructions = new Instructions();
+            jPanelL.setPreferredSize(new Dimension(100, 300));
+            jPanelR.removeAll();
+            add(jPanelInstructions, BorderLayout.CENTER);
+            repaint();
+            revalidate();
             
         }else if(clicked == reviewer){
-
-            SwingUtilities.invokeLater(new Runnable(){
-            public void run() {
-                
-            }
-            });
+            
+            jPanelReviewer = new Reviewer();
+            jPanelL.setPreferredSize(new Dimension(100, 300));
+            jPanelR.removeAll();
+            add(jPanelReviewer, BorderLayout.CENTER);
+            repaint();
+            revalidate();
             
         }else {
             

@@ -9,29 +9,31 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Gavin Nigel Chuacuco
  */
-public class Reviewer extends JFrame{
-    
+public class Reviewer extends JPanel{
+
     private toMain toolbar;
+    public JLabel jTitle;
     
     public Reviewer(){
-        super("REVIEWER");
-        //Testing
-        setLayout(new BorderLayout());
         
+        System.out.println("IT REACHED TO ABOUT PANEL CLASS");
+        setLayout(new BorderLayout());
+        jTitle = new JLabel("REVIEWER", JLabel.CENTER);
+        add(jTitle, BorderLayout.CENTER);
         toolbar = new toMain();
-    
         add(toolbar, BorderLayout.SOUTH);
         
-        setSize(600,600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        setSize(500,600);
         
     }
-    
+
 }
+

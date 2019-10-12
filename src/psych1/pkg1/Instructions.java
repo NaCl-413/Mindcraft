@@ -6,32 +6,35 @@
 package psych1.pkg1;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Gavin Nigel Chuacuco
  */
-public class Instructions extends JFrame{
-    
+public class Instructions extends JPanel{
+
     private toMain toolbar;
+    public JLabel jTitle;
     
-    public Instructions (){
-        super("INSTRUCTIONS");
+    public Instructions(){
         
+        System.out.println("IT REACHED TO ABOUT PANEL CLASS");
         setLayout(new BorderLayout());
-        
         toolbar = new toMain();
-    
+        jTitle = new JLabel("INSTRUCTIONS", JLabel.CENTER);
+        add(jTitle, BorderLayout.CENTER);
         add(toolbar, BorderLayout.SOUTH);
         
-        setSize(600,600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        setSize(500,600);
         
     }
-    
+
 }
+
