@@ -31,6 +31,7 @@ public class MainMenu extends JFrame implements ActionListener{
     private About jPanelAbout;
     private Instructions jPanelInstructions;
     private Reviewer jPanelReviewer;
+    private JButton mainMenu;
     
     public MainMenu(){
         super("MINDCRAFT"); 
@@ -43,14 +44,21 @@ public class MainMenu extends JFrame implements ActionListener{
         jPanelL.setPreferredSize(new Dimension(300, 300));
         jPanelL.setBackground(Color.cyan);
         
+        mainMenu = new JButton("Main Menu");
+        mainMenu.addActionListener(this);
+        jPanelL.add(mainMenu, BorderLayout.SOUTH);
+        mainMenu.setVisible(false);
+        
         add(jPanelR, BorderLayout.CENTER);
         jPanelR.setPreferredSize(new Dimension(300, 300));
         jPanelR.setBackground(Color.GRAY);
         
         jPanelR.removeAll();
+        
+        jPanelR = new jPanelRight();
         add(jPanelR, BorderLayout.CENTER);
-        repaint();
-        revalidate();
+        jPanelR.setPreferredSize(new Dimension(300, 300));
+        jPanelR.setBackground(Color.GRAY);
         
         setSize(600,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,18 +67,34 @@ public class MainMenu extends JFrame implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        JButton clicked = (JButton)ae.getSource();
+        if(clicked == mainMenu){
+        jPanelR.removeAll();
+        jPanelL.setPreferredSize(new Dimension(300, 300));
+        jPanelR = new jPanelRight();
+        add(jPanelR, BorderLayout.CENTER);
+        jPanelR.setPreferredSize(new Dimension(300, 300));
+        jPanelR.setBackground(Color.GRAY);
+        
+        repaint();
+        revalidate();
+        }
+            
     }
     
-class jPanelLeft extends JPanel {
+class jPanelLeft extends JPanel{
     
     public JLabel jTitle;
     
+    
     jPanelLeft (){
+        
         setLayout(new BorderLayout());
         jTitle = new JLabel("MindCraft", JLabel.CENTER);
         
         add(jTitle, BorderLayout.CENTER);
+
     }
     
 }
@@ -83,6 +107,7 @@ public class jPanelRight extends JPanel implements ActionListener{
     private JButton reviewer;
     
     jPanelRight() {
+        
         start = new JButton("START");
         about = new JButton("ABOUT");
         instructions = new JButton("INSTRUCTIONS");
@@ -99,14 +124,14 @@ public class jPanelRight extends JPanel implements ActionListener{
         add(about);
         add(instructions);
         add(reviewer);
-
+        
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         
         JButton clicked = (JButton)e.getSource();
-        
+        mainMenu.setVisible(true);
         if(clicked == start){
             
             jPanelStart = new Start();
@@ -125,12 +150,12 @@ public class jPanelRight extends JPanel implements ActionListener{
             repaint();
             revalidate();
             
-
             
         }else if(clicked == instructions){
             
             jPanelInstructions = new Instructions();
             jPanelL.setPreferredSize(new Dimension(100, 300));
+            jPanelR.removeAll();
             jPanelR.removeAll();
             add(jPanelInstructions, BorderLayout.CENTER);
             repaint();
