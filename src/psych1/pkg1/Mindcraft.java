@@ -17,6 +17,7 @@ public class Mindcraft extends JFrame implements ActionListener{
     private JPanel about;
     private JPanel instruction;
     private JPanel reviewer;
+    private JPanel rightPanel;
 
     private JButton toMainMenu = new JButton("MAIN MENU");
     private JButton toGame = new JButton("START");
@@ -28,11 +29,40 @@ public class Mindcraft extends JFrame implements ActionListener{
         super("MINDCRAFT");
         setLayout(new BorderLayout());
 
+        //Panel init
         titlePanel.setPreferredSize(new Dimension(300, 300));
         titlePanel.setBackground(Color.cyan);
+        mainMenu.setPreferredSize(new Dimension(300, 300));
+        mainMenu.setBackground(Color.gray);
+        game.setPreferredSize(new Dimension(300, 300));
+        game.setBackground(Color.gray);
+        about.setPreferredSize(new Dimension(300, 300));
+        about.setBackground(Color.gray);
+        instruction.setPreferredSize(new Dimension(300, 300));
+        instruction.setBackground(Color.gray);
+        reviewer.setPreferredSize(new Dimension(300, 300));
+        reviewer.setBackground(Color.gray);
+
+        rightPanel = mainMenu;
+
+        add(titlePanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.CENTER);
+
+        setSize(600,600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent a) {
+        JButton clicked = (JButton)a.getSource();
+        if(clicked == toMainMenu){
+            titlePanel.setPreferredSize(new Dimension(300, 300));
+            add(mainMenu, BorderLayout.CENTER);
+        }else if(clicked == toGame){
+
+        }
+        repaint();
+        revalidate();
     }
 }
