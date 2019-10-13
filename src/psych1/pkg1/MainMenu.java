@@ -32,6 +32,11 @@ public class MainMenu extends JFrame implements ActionListener{
     private Instructions jPanelInstructions;
     private Reviewer jPanelReviewer;
     private JButton mainMenu;
+    private JButton start;
+    private JButton about;
+    private JButton instructions;
+    private JButton reviewer;
+    
     
     public MainMenu(){
         super("MINDCRAFT"); 
@@ -51,16 +56,9 @@ public class MainMenu extends JFrame implements ActionListener{
         
         add(jPanelR, BorderLayout.CENTER);
         jPanelR.setPreferredSize(new Dimension(300, 300));
-        jPanelR.setBackground(Color.GRAY);
+        jPanelR.setBackground(Color.GRAY); 
         
-        jPanelR.removeAll();
-        
-        jPanelR = new jPanelRight();
-        add(jPanelR, BorderLayout.CENTER);
-        jPanelR.setPreferredSize(new Dimension(300, 300));
-        jPanelR.setBackground(Color.GRAY);
-        
-        setSize(600,600);
+        setSize(1280,720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }   
@@ -70,16 +68,18 @@ public class MainMenu extends JFrame implements ActionListener{
         
         JButton clicked = (JButton)ae.getSource();
         if(clicked == mainMenu){
-        jPanelR.removeAll();
+        
+        System.out.println("IT REACHED MAIN MENU BUTTON");
+        remove(jPanelR);
         jPanelL.setPreferredSize(new Dimension(300, 300));
         jPanelR = new jPanelRight();
         add(jPanelR, BorderLayout.CENTER);
         jPanelR.setPreferredSize(new Dimension(300, 300));
         jPanelR.setBackground(Color.GRAY);
-        
+        mainMenu.setVisible(false);
         repaint();
         revalidate();
-        }
+        }else {}
             
     }
     
@@ -101,10 +101,7 @@ class jPanelLeft extends JPanel{
 
 public class jPanelRight extends JPanel implements ActionListener{
 
-    private JButton start;
-    private JButton about;
-    private JButton instructions;
-    private JButton reviewer;
+
     
     jPanelRight() {
         
