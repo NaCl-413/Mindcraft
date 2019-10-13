@@ -19,7 +19,6 @@ import javax.swing.SwingUtilities;
  */
 public class Reviewer extends JPanel{
 
-    private toMain toolbar;
     public JLabel jTitle;
     
     public Reviewer(){
@@ -28,10 +27,7 @@ public class Reviewer extends JPanel{
         setLayout(new BorderLayout());
         jTitle = new JLabel("REVIEWER", JLabel.CENTER);
         add(jTitle, BorderLayout.CENTER);
-        toolbar = new toMain();
-        add(toolbar, BorderLayout.SOUTH);
         
-        setSize(500,600);
         
     }
 
