@@ -15,7 +15,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Duration;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -28,6 +30,12 @@ public class Start extends JPanel{
     private jPanelGame2 jPanelG2;
     private jPanelGame3 jPanelG3;
     public JLabel jTitle;
+    public long runningTime;
+    public long hours;
+    public long minutes;
+    public long seconds;
+    public long millis;
+    public long mistakes = 0;
     
     public Start(){
         setLayout(new BorderLayout());
@@ -60,23 +68,23 @@ public class Start extends JPanel{
         public StopWatchPane() {
             setLayout(new GridBagLayout());
             label = new JLabel(String.format("%04d:%02d:%02d.%03d", 0, 0, 0, 0));
-
+            
             timer = new Timer(100, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    long runningTime = System.currentTimeMillis() - lastTickTime;
+                    runningTime = System.currentTimeMillis() - lastTickTime;
                     Duration duration = Duration.ofMillis(runningTime);
-                    long hours = duration.toHours();
+                    hours = duration.toHours();
                     duration = duration.minusHours(hours);
-                    long minutes = duration.toMinutes();
+                    minutes = duration.toMinutes();
                     duration = duration.minusMinutes(minutes);
-                    long millis = duration.toMillis();
-                    long seconds = millis / 1000;
+                    millis = duration.toMillis();
+                    seconds = millis / 1000;
                     millis -= (seconds * 1000);
                     label.setText(String.format("%04d:%02d:%02d.%03d", hours, minutes, seconds, millis));
                 }
             });
-
+            
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
@@ -100,6 +108,7 @@ public class Start extends JPanel{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     timer.stop();
+                    new GameEnd();
                 }
             });
             
@@ -111,10 +120,32 @@ public class Start extends JPanel{
             gbc.gridx++;
             add(stop, gbc);
         }
-
+            
     }    
     
+    public class GameEnd {  
+        
+    JFrame f;  
+//    GameEnd(){
+//        
+//        f=new JFrame();  
+//        JOptionPane.showMessageDialog(f,"Score: "+seconds);  
+//
+//    }  
+
+    GameEnd(){  
+    f=new JFrame();  
+    long scoreFinal= 0;
+    long scoreMinute = 0;
+    long mistakeMultiplier = 5;
+    long mistakePenalty = 0;
+    scoreMinute = minutes*60;
+    mistakePenalty = mistakes*mistakeMultiplier;
+    scoreFinal = seconds + scoreMinute - mistakePenalty;
     
+    JOptionPane.showMessageDialog(f,"Time: "+minutes+" minutes and "+seconds+" seconds\nMistake Penalty: "+mistakePenalty+"\nScore: "+scoreFinal,"GAME FINISHED",1);     
+}   
+}   
     
     
     class jPanelGame1 extends JPanel{
