@@ -5,8 +5,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Mindcraft extends JFrame implements ActionListener{
@@ -15,38 +18,67 @@ public class Mindcraft extends JFrame implements ActionListener{
     private JPanel mainMenu;
     private JPanel game;
     private JPanel about;
-    private JPanel instruction;
+    private JPanel instructions;
     private JPanel reviewer;
     private JPanel rightPanel;
 
     private JButton toMainMenu = new JButton("MAIN MENU");
     private JButton toGame = new JButton("START");
     private JButton toAbout = new JButton("ABOUT");
-    private JButton toInstruction = new JButton("INSTRUCTION");
+    private JButton toInstructions = new JButton("INSTRUCTION");
     private JButton toReviewer = new JButton("REVIEWER");
+
+    private JLabel title = new JLabel("MindCraft", JLabel.CENTER);;
 
     public Mindcraft(){
         super("MINDCRAFT");
         setLayout(new BorderLayout());
 
         //Panel init
+        //Title Panel
         titlePanel.setPreferredSize(new Dimension(300, 300));
         titlePanel.setBackground(Color.cyan);
+        titlePanel.setLayout(new BorderLayout());
+
+        titlePanel.add(title, BorderLayout.CENTER);
+
+        //Main Menu Panel
         mainMenu.setPreferredSize(new Dimension(300, 300));
         mainMenu.setBackground(Color.gray);
-        game.setPreferredSize(new Dimension(300, 300));
-        game.setBackground(Color.gray);
+        mainMenu.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        mainMenu.add(toGame);
+        mainMenu.add(toAbout);
+        mainMenu.add(toInstructions);
+        mainMenu.add(toReviewer);
+
+        //About Panel
         about.setPreferredSize(new Dimension(300, 300));
         about.setBackground(Color.gray);
-        instruction.setPreferredSize(new Dimension(300, 300));
-        instruction.setBackground(Color.gray);
+
+        //Instructions Panel
+        instructions.setPreferredSize(new Dimension(300, 300));
+        instructions.setBackground(Color.gray);
+
+        //Reviewer Panel
         reviewer.setPreferredSize(new Dimension(300, 300));
         reviewer.setBackground(Color.gray);
 
-        rightPanel = mainMenu;
+        //Game Proper Panels
+        game.setPreferredSize(new Dimension(300, 300));
+        game.setBackground(Color.gray);
 
+        //Button init
+        toMainMenu.addActionListener(this);
+        toGame.addActionListener(this);
+        toAbout.addActionListener(this);
+        toInstructions.addActionListener(this);
+        toReviewer.addActionListener(this);
+
+        rightPanel = mainMenu;
         add(titlePanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.CENTER);
+
 
         setSize(600,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,9 +90,18 @@ public class Mindcraft extends JFrame implements ActionListener{
         JButton clicked = (JButton)a.getSource();
         if(clicked == toMainMenu){
             titlePanel.setPreferredSize(new Dimension(300, 300));
-            add(mainMenu, BorderLayout.CENTER);
-        }else if(clicked == toGame){
-
+            rightPanel = mainMenu;
+        }else{
+            titlePanel.setPreferredSize(new Dimension(100, 300));
+            if(clicked == toAbout){
+                rightPanel = about;
+            }else if(clicked == toInstructions){
+                rightPanel = instructions;
+            }else if(clicked == toReviewer){
+                rightPanel = reviewer;
+            }else if(clicked == toGame){
+                rightPanel = game;
+            }
         }
         repaint();
         revalidate();
