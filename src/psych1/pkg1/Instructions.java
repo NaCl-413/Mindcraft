@@ -20,19 +20,15 @@ import javax.swing.SwingUtilities;
  */
 public class Instructions extends JPanel{
 
-    private toMain toolbar;
     public JLabel jTitle;
     
     public Instructions(){
         
         System.out.println("IT REACHED TO ABOUT PANEL CLASS");
         setLayout(new BorderLayout());
-        toolbar = new toMain();
         jTitle = new JLabel("INSTRUCTIONS", JLabel.CENTER);
         add(jTitle, BorderLayout.CENTER);
-        add(toolbar, BorderLayout.SOUTH);
         
-        setSize(500,600);
         
     }
 
