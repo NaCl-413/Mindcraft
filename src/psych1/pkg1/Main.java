@@ -12,11 +12,11 @@ public class Main {
 
         SwingUtilities.invokeLater(new Runnable(){
             public void run() {
-                Mindcraft game = new Mindcraft();
-
-                game.setSize(600,600);
-                game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                game.setVisible(true);
+                Mindcraft g = new Mindcraft();
+                
+                g.setSize(600,600);
+                g.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                g.setVisible(true);
             }
         });
 

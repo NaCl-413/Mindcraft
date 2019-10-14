@@ -14,9 +14,10 @@ import javax.swing.JPanel;
 
 public class Mindcraft extends JFrame implements ActionListener{
 
+    private Game game = new Game();
+    
     private JPanel titlePanel = new JPanel();
     private JPanel mainMenu = new JPanel();
-    private JPanel game = new JPanel();
     private JPanel about = new JPanel();
     private JPanel instructions = new JPanel();
     private JPanel reviewer = new JPanel();
@@ -32,14 +33,13 @@ public class Mindcraft extends JFrame implements ActionListener{
     private JLabel aboutTitle = new JLabel("ABOUT", JLabel.CENTER);
     private JLabel instructionsTitle = new JLabel("INSTRUCTIONS", JLabel.CENTER);
     private JLabel reviewerTitle = new JLabel("REVIEWER", JLabel.CENTER);
-
+    
 
     public Mindcraft(){
         super("MINDCRAFT");
         setLayout(new BorderLayout());
 
         //Panel init
-
         //Title Panel
         titlePanel.setPreferredSize(new Dimension(300, 300));
         titlePanel.setBackground(Color.cyan);
@@ -61,15 +61,15 @@ public class Mindcraft extends JFrame implements ActionListener{
         about.setPreferredSize(new Dimension(300, 300));
         about.setBackground(Color.gray);
         about.setLayout(new BorderLayout());
-
+        
         about.add(aboutTitle, BorderLayout.NORTH);
         about.add(toMainMenu, BorderLayout.CENTER);
-
+        
         //Instructions Panel
         instructions.setPreferredSize(new Dimension(300, 300));
         instructions.setBackground(Color.gray);
         instructions.setLayout(new BorderLayout());
-
+        
         instructions.add(instructionsTitle, BorderLayout.NORTH);
         instructions.add(toMainMenu, BorderLayout.CENTER);
 
@@ -77,7 +77,7 @@ public class Mindcraft extends JFrame implements ActionListener{
         reviewer.setPreferredSize(new Dimension(300, 300));
         reviewer.setBackground(Color.gray);
         reviewer.setLayout(new BorderLayout());
-
+        
         reviewer.add(reviewerTitle, BorderLayout.NORTH);
         reviewer.add(toMainMenu, BorderLayout.CENTER);
 
