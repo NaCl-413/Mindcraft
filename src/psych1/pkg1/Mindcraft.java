@@ -14,14 +14,14 @@ import javax.swing.JPanel;
 
 public class Mindcraft extends JFrame implements ActionListener{
 
-    private Game game = new Game();
+    private Game gamePanel = new Game();
     
     private JPanel titlePanel = new JPanel();
-    private JPanel mainMenu = new JPanel();
-    private JPanel about = new JPanel();
-    private JPanel instructions = new JPanel();
-    private JPanel reviewer = new JPanel();
     private JPanel rightPanel = new JPanel();
+    private JPanel mainMenuPanel = new JPanel();
+    private JPanel aboutPanel = new JPanel();
+    private JPanel instructionsPanel = new JPanel();
+    private JPanel reviewerPanel = new JPanel();
 
     private JButton toMainMenu = new JButton("MAIN MENU");
     private JButton toGame = new JButton("START");
@@ -39,51 +39,51 @@ public class Mindcraft extends JFrame implements ActionListener{
         super("MINDCRAFT");
         setLayout(new BorderLayout());
 
-        //Panel init
+        //Panel Initializations(Init)
         //Title Panel
-        titlePanel.setPreferredSize(new Dimension(300, 300));
+        titlePanel.setPreferredSize(new Dimension(590, 720));
         titlePanel.setBackground(Color.cyan);
         titlePanel.setLayout(new BorderLayout());
 
         titlePanel.add(mainTitle, BorderLayout.CENTER);
 
         //Main Menu Panel
-        mainMenu.setPreferredSize(new Dimension(300, 300));
-        mainMenu.setBackground(Color.gray);
-        mainMenu.setLayout(new BoxLayout(mainMenu, BoxLayout.Y_AXIS));
+        mainMenuPanel.setPreferredSize(new Dimension(590, 720));
+        mainMenuPanel.setBackground(Color.gray);
+        mainMenuPanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.Y_AXIS));
 
-        mainMenu.add(toGame);
-        mainMenu.add(toAbout);
-        mainMenu.add(toInstructions);
-        mainMenu.add(toReviewer);
+        mainMenuPanel.add(toGame);
+        mainMenuPanel.add(toAbout);
+        mainMenuPanel.add(toInstructions);
+        mainMenuPanel.add(toReviewer);
 
         //About Panel
-        about.setPreferredSize(new Dimension(300, 300));
-        about.setBackground(Color.gray);
-        about.setLayout(new BorderLayout());
+        aboutPanel.setPreferredSize(new Dimension(780, 720));
+        aboutPanel.setBackground(Color.gray);
+        aboutPanel.setLayout(new BorderLayout());
         
-        about.add(aboutTitle, BorderLayout.NORTH);
-        about.add(toMainMenu, BorderLayout.CENTER);
+        aboutPanel.add(aboutTitle, BorderLayout.NORTH);
+        aboutPanel.add(toMainMenu, BorderLayout.CENTER);
         
         //Instructions Panel
-        instructions.setPreferredSize(new Dimension(300, 300));
-        instructions.setBackground(Color.gray);
-        instructions.setLayout(new BorderLayout());
+        instructionsPanel.setPreferredSize(new Dimension(780, 720));
+        instructionsPanel.setBackground(Color.gray);
+        instructionsPanel.setLayout(new BorderLayout());
         
-        instructions.add(instructionsTitle, BorderLayout.NORTH);
-        instructions.add(toMainMenu, BorderLayout.CENTER);
+        instructionsPanel.add(instructionsTitle, BorderLayout.NORTH);
+        instructionsPanel.add(toMainMenu, BorderLayout.CENTER);
 
         //Reviewer Panel
-        reviewer.setPreferredSize(new Dimension(300, 300));
-        reviewer.setBackground(Color.gray);
-        reviewer.setLayout(new BorderLayout());
+        reviewerPanel.setPreferredSize(new Dimension(780, 720));
+        reviewerPanel.setBackground(Color.gray);
+        reviewerPanel.setLayout(new BorderLayout());
         
-        reviewer.add(reviewerTitle, BorderLayout.NORTH);
-        reviewer.add(toMainMenu, BorderLayout.CENTER);
+        reviewerPanel.add(reviewerTitle, BorderLayout.NORTH);
+        reviewerPanel.add(toMainMenu, BorderLayout.CENTER);
 
         //Game Proper Panels
-        game.setPreferredSize(new Dimension(300, 300));
-        game.setBackground(Color.gray);
+        gamePanel.setPreferredSize(new Dimension(780, 720));
+        gamePanel.setBackground(Color.gray);
 
         //Button init
         toMainMenu.addActionListener(this);
@@ -92,7 +92,9 @@ public class Mindcraft extends JFrame implements ActionListener{
         toInstructions.addActionListener(this);
         toReviewer.addActionListener(this);
 
-        rightPanel = mainMenu;
+        //Addition of Components
+        //separates titlePanel(Left) and main content called rightPanel(Right)
+        rightPanel = mainMenuPanel;
         add(titlePanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.CENTER);
     }
@@ -101,22 +103,27 @@ public class Mindcraft extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent a) {
         JButton clicked = (JButton)a.getSource();
         remove(rightPanel);
-        if(clicked == toMainMenu){
-            titlePanel.setPreferredSize(new Dimension(300, 300));
-            rightPanel = mainMenu;
+        
+        if(clicked == toGame){
+            gamePanel.resetGame();
         }else{
-            titlePanel.setPreferredSize(new Dimension(100, 300));
-            if(clicked == toAbout){
-                rightPanel = about;
-            }else if(clicked == toInstructions){
-                rightPanel = instructions;
-            }else if(clicked == toReviewer){
-                rightPanel = reviewer;
-            }else if(clicked == toGame){
-                rightPanel = game;
+            //replaces rightPanel components to clicked button while titlePanel is the same
+            if(clicked == toMainMenu){
+                titlePanel.setPreferredSize(new Dimension(590, 300));
+                rightPanel = mainMenuPanel;
+            }else{
+                titlePanel.setPreferredSize(new Dimension(400, 300));
+                if(clicked == toAbout){
+                    rightPanel = aboutPanel;
+                }else if(clicked == toInstructions){
+                    rightPanel = instructionsPanel;
+                }else if(clicked == toReviewer){
+                    rightPanel = reviewerPanel;
+                }
             }
+            add(rightPanel);
         }
-        add(rightPanel);
+        
         repaint();
         revalidate();
     }

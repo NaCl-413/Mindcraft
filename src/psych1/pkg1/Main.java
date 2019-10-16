@@ -12,9 +12,10 @@ public class Main {
 
         SwingUtilities.invokeLater(new Runnable(){
             public void run() {
+                //Main JFrame init
                 Mindcraft g = new Mindcraft();
                 
-                g.setSize(600,600);
+                g.setSize(1180,720);
                 g.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 g.setVisible(true);
             }
