@@ -4,27 +4,20 @@ import java.util.ArrayList;
 
 public class Questionnaire{
 
-    String[] questions;
-    String[] correctAns;
-    String[] wrongAns;
+    private String[] questions;
+    private String[] correctAns;
+    private String[] wrongAns;
 
     //prevents asking questions twice
     ArrayList<Integer> usedQuestions = new ArrayList<Integer>();
 
-    //for Game 1
     public Questionnaire(String[] questions, String[] correctAns, String[] wrongAns){
         this.questions = questions;
         this.correctAns = correctAns;
         this.wrongAns = wrongAns;
     }
 
-    //for Game 2 and 3
-    public Questionnaire(String[] questions, String[] correctAns){
-        this.questions = questions;
-        this.correctAns = correctAns;
-    }
-
-    private String getQuestion(){
+    public String getQuestion(){
         //randomizes what question to get
         int random = (int)(Math.random() * questions.length);
         String question;
@@ -39,7 +32,7 @@ public class Questionnaire{
         return question;
     }
 
-    private String[] getChoices(int i){
+    public String[] getChoices(int i){
         String[] choices;
         //Simplicity's sake; so that all answers are in one side for Game 1
         int random = (int)(Math.random() * 2);
@@ -52,7 +45,11 @@ public class Questionnaire{
         return choices;
     }
 
-    private String getAnswer(int i){
+    public String getAnswer(int i){
         return correctAns[i];
+    }
+    
+    public void resetQuestionnaire(){
+        usedQuestions.clear();
     }
 }
