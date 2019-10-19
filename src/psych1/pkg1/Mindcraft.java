@@ -39,15 +39,15 @@ public class Mindcraft extends JFrame implements ActionListener{
         super("MINDCRAFT");
         setLayout(new BorderLayout());
 
-        //Panel Initializations(Init)
-        //Title Panel
+    //Panel Initializations(Init)
+    //Title Panel
         titlePanel.setPreferredSize(new Dimension(590, 720));
         titlePanel.setBackground(Color.cyan);
         titlePanel.setLayout(new BorderLayout());
 
         titlePanel.add(mainTitle, BorderLayout.CENTER);
 
-        //Main Menu Panel
+    //Main Menu Panel
         mainMenuPanel.setPreferredSize(new Dimension(590, 720));
         mainMenuPanel.setBackground(Color.gray);
         mainMenuPanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.Y_AXIS));
@@ -57,7 +57,7 @@ public class Mindcraft extends JFrame implements ActionListener{
         mainMenuPanel.add(toInstructions);
         mainMenuPanel.add(toReviewer);
 
-        //About Panel
+    //About Panel
         aboutPanel.setPreferredSize(new Dimension(780, 720));
         aboutPanel.setBackground(Color.gray);
         aboutPanel.setLayout(new BorderLayout());
@@ -65,7 +65,7 @@ public class Mindcraft extends JFrame implements ActionListener{
         aboutPanel.add(aboutTitle, BorderLayout.NORTH);
         aboutPanel.add(toMainMenu, BorderLayout.CENTER);
         
-        //Instructions Panel
+    //Instructions Panel
         instructionsPanel.setPreferredSize(new Dimension(780, 720));
         instructionsPanel.setBackground(Color.gray);
         instructionsPanel.setLayout(new BorderLayout());
@@ -73,7 +73,7 @@ public class Mindcraft extends JFrame implements ActionListener{
         instructionsPanel.add(instructionsTitle, BorderLayout.NORTH);
         instructionsPanel.add(toMainMenu, BorderLayout.CENTER);
 
-        //Reviewer Panel
+    //Reviewer Panel
         reviewerPanel.setPreferredSize(new Dimension(780, 720));
         reviewerPanel.setBackground(Color.gray);
         reviewerPanel.setLayout(new BorderLayout());
@@ -81,18 +81,18 @@ public class Mindcraft extends JFrame implements ActionListener{
         reviewerPanel.add(reviewerTitle, BorderLayout.NORTH);
         reviewerPanel.add(toMainMenu, BorderLayout.CENTER);
 
-        //Game Proper Panels
+    //Game Proper Panels
         gamePanel.setPreferredSize(new Dimension(780, 720));
         gamePanel.setBackground(Color.gray);
 
-        //Button init
+    //Buttons Init
         toMainMenu.addActionListener(this);
         toGame.addActionListener(this);
         toAbout.addActionListener(this);
         toInstructions.addActionListener(this);
         toReviewer.addActionListener(this);
 
-        //Addition of Components
+    //Addition of Components
         //separates titlePanel(Left) and main content called rightPanel(Right)
         rightPanel = mainMenuPanel;
         add(titlePanel, BorderLayout.WEST);

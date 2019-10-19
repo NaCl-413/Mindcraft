@@ -33,39 +33,44 @@ public class Game extends JPanel implements ActionListener{
     private Questionnaire g3Questionnaire;
             
     public Game(){
+        try {
         //Game Panels Init
         //Game1 Panel
-        game1Panel.setPreferredSize(new Dimension(1180, 360));
-        game1Panel.setLayout(new BorderLayout());
-        
-        game1Panel.add(game1Title, BorderLayout.CENTER);
-        
+            game1Panel.setPreferredSize(new Dimension(1180, 360));
+            game1Panel.setLayout(new BorderLayout());
+
+            game1Panel.add(game1Title, BorderLayout.CENTER);
+
         //Game2 Panel
-        game2Panel.setPreferredSize(new Dimension(590, 360));
-        game2Panel.setLayout(new BorderLayout());
-        
-        game2Panel.add(game2Title, BorderLayout.CENTER);
-        
+            game2Panel.setPreferredSize(new Dimension(590, 360));
+            game2Panel.setLayout(new BorderLayout());
+
+            game2Panel.add(game2Title, BorderLayout.CENTER);
+
         //Game3 Panel
-        game3Panel.setPreferredSize(new Dimension(590, 360));
-        game3Panel.setLayout(new BorderLayout());
-        
-        game3Panel.add(game3Title, BorderLayout.CENTER);
-        /*
+            game3Panel.setPreferredSize(new Dimension(590, 360));
+            game3Panel.setLayout(new BorderLayout());
+
+            game3Panel.add(game3Title, BorderLayout.CENTER);
+            
         //Questionnaire Init
-        ArrayList<Questionnaire> masterList = new ArrayList<Questionnaire>();
+            ArrayList<Questionnaire> masterList = new ArrayList<Questionnaire>();
         
-        //for every question file per game to put into an array
-        try {
+            //for every question file per game to put into an array
             String line = null;
             String[] fileList = {q1File, q2File, q3File};
             
+            ArrayList<String> questionList;
+            ArrayList<String> correctAnsList;
+            ArrayList<String> wrongAnsList;
+            String[] split;
+            
             for(String s: fileList){
-                ArrayList<String> questionList = new ArrayList<String>();
-                ArrayList<String> correctAnsList = new ArrayList<String>();
-                ArrayList<String> wrongAnsList = new ArrayList<String>();
-                String[] split = new String[3];
-                
+                questionList = new ArrayList<String>();
+                correctAnsList = new ArrayList<String>();
+                wrongAnsList = new ArrayList<String>();
+                split = new String[3];
+
                 //reads file and separates per line by % and stores into arraylists
                 BufferedReader reader = new BufferedReader(new FileReader(s));
                 while((line = reader.readLine()) != null) {
@@ -81,20 +86,21 @@ public class Game extends JPanel implements ActionListener{
                 tempQArray = questionList.toArray(tempQArray);
                 tempCArray = correctAnsList.toArray(tempCArray);
                 tempWArray = wrongAnsList.toArray(tempWArray);
-                
+
                 //adds Questionnaire to arraylist
                 masterList.add(new Questionnaire(tempQArray,tempCArray,tempWArray));
-                reader.close(); 
-            }                    
+                reader.close();
+            }
+
+            Questionnaire[] tempMArray = new Questionnaire[masterList.size()];
+            tempMArray = masterList.toArray(tempMArray);
+            g1Questionnaire = tempMArray[0];
+            g2Questionnaire = tempMArray[1];
+            g3Questionnaire = tempMArray[2];
+            
         }catch(Exception e){
             System.out.println(e);
         }
-        Questionnaire[] tempMArray = new Questionnaire[masterList.size()];
-        tempMArray = masterList.toArray(tempMArray);
-        g1Questionnaire = tempMArray[0];
-        g2Questionnaire = tempMArray[1];
-        g3Questionnaire = tempMArray[2];
-        */
         
     }
     
