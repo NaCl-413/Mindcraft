@@ -3,13 +3,14 @@ package psych1.pkg1;
 import java.util.ArrayList;
 
 public class Questionnaire{
-
+    //how many will be asked
+    private int numQuestions = 10;
+    
     private String[] questions;
     private String[] correctAns;
     private String[] wrongAns;
 
-    //prevents asking questions twice
-    ArrayList<Integer> usedQuestions = new ArrayList<Integer>();
+    ArrayList<Integer> questionsSelected = new ArrayList<Integer>();
 
     public Questionnaire(String[] questions, String[] correctAns, String[] wrongAns){
         this.questions = questions;
@@ -17,19 +18,24 @@ public class Questionnaire{
         this.wrongAns = wrongAns;
     }
 
-    public String getQuestion(){
+    public String selectQuestion(){
         //randomizes what question to get
         int random = (int)(Math.random() * questions.length);
         String question;
-        if(usedQuestions.contains(random)){
-            question = getQuestion();
+        //prevents adding a question twice
+        if(questionsSelected.contains(random)){
+            question = selectQuestion();
         }
         else{
             question = questions[random];
         }
-        //adds index number to store numbers used
-        usedQuestions.add(random);
+        //adds index number to questionSelected
+        questionsSelected.add(random);
         return question;
+    }
+    
+    public String getQuestion(int i){
+        return questions[i];
     }
 
     public String[] getChoices(int i){
@@ -50,6 +56,13 @@ public class Questionnaire{
     }
     
     public void resetQuestionnaire(){
-        usedQuestions.clear();
+        questionsSelected.clear();
+        for(int i = 0;i < numQuestions;i++){
+            selectQuestion();
+        }
+    }
+    
+    public boolean nextQuestion(){
+        return questionsSelected.remove(int.class);
     }
 }
