@@ -25,6 +25,14 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private String q2File = "questionnaire2.txt";
     private String q3File = "questionnaire3.txt";
     
+    
+    ImageIcon instructionsImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
+    JScrollPane instructionsPane = new JScrollPane(new JLabel(instructionsImage));
+    ImageIcon reviewerImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
+    JScrollPane reviewerPane = new JScrollPane(new JLabel(reviewerImage));
+    ImageIcon aboutImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
+    JScrollPane aboutPane = new JScrollPane(new JLabel(aboutImage));
+    
     private JPanel titlePanel = new JPanel();
     private JPanel rightPanel = new JPanel();
     private JPanel mainMenuPanel = new JPanel();
@@ -35,13 +43,6 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JPanel game1Panel = new JPanel();
     private JPanel game2Panel = new JPanel();
     private JPanel game3Panel = new JPanel();
-    
-    ImageIcon instructionsImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
-    JScrollPane instructionsPane = new JScrollPane(new JLabel(instructionsImage));
-    ImageIcon reviewerImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
-    JScrollPane reviewerPane = new JScrollPane(new JLabel(reviewerImage));
-    ImageIcon aboutImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
-    JScrollPane aboutPane = new JScrollPane(new JLabel(aboutImage));
 
     private JButton toMainMenu = new JButton("MAIN MENU");
     private JButton toGame = new JButton("START");
@@ -63,6 +64,9 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     
     private boolean isInGame = false;
     private boolean isEnd = false;
+    private boolean isG1End = false;
+    private boolean isG2End = false;
+    private boolean isG3End = false;
     private int wrongAnsCount;
     private int finalTime;
 
@@ -91,26 +95,22 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         aboutPanel.setBackground(Color.gray);
         aboutPanel.setLayout(new BorderLayout());
         aboutPanel.add(aboutTitle, BorderLayout.NORTH);
-        aboutPanel.add(toMainMenu, BorderLayout.SOUTH);
         aboutPanel.add(aboutPane,BorderLayout.CENTER);
-
+        
     //Instructions Panel
         instructionsPanel.setPreferredSize(new Dimension(780, 720));
         instructionsPanel.setBackground(Color.gray);
         instructionsPanel.setLayout(new BorderLayout());
         instructionsPanel.add(instructionsTitle, BorderLayout.NORTH);
-        instructionsPanel.add(toMainMenu, BorderLayout.SOUTH);
         instructionsPanel.add(instructionsPane,BorderLayout.CENTER);
-        
-        
+
     //Reviewer Panel
         reviewerPanel.setPreferredSize(new Dimension(780, 720));
         reviewerPanel.setBackground(Color.gray);
         reviewerPanel.setLayout(new BorderLayout());
         reviewerPanel.add(reviewerTitle, BorderLayout.NORTH);
-        reviewerPanel.add(toMainMenu, BorderLayout.SOUTH);
         reviewerPanel.add(reviewerPane,BorderLayout.CENTER);
-        
+
     //Game Panel
         gamePanel.setPreferredSize(new Dimension(1180, 720));
         gamePanel.setBackground(Color.gray);
@@ -236,9 +236,34 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         g3Questionnaire.resetQuestionnaire();
     }
     
-    private boolean checkAnswer(int i){
-        boolean correct = true;
-        //*if wrong then correct = false
+    private void updateQuestionPanel(){
+        /*
+            DITO MO LAGAY PAGPALIT NG QUESTION       
+        */
+    }
+    
+    private boolean checkAnswer(int i, int a){
+        boolean correct = false;
+        if(i == 1){
+            if(a == g1Questionnaire.getCorrectAnswerIndex()){
+                correct = true;
+            }
+        }else if(i == 2){
+            int cQuestion = g3Questionnaire.getCurrentQuestion();
+            if(((a == 1)&&(g2Questionnaire.getCorrectAnswer(cQuestion) == "W"))
+           ||((a == 2) && (g2Questionnaire.getCorrectAnswer(cQuestion) == "A"))
+           ||((a == 3) && (g2Questionnaire.getCorrectAnswer(cQuestion) == "S"))
+           ||((a == 4) && (g2Questionnaire.getCorrectAnswer(cQuestion) == "D"))){
+                correct = true;
+            }
+            
+        }else if(i == 3){
+            int cQuestion = g3Questionnaire.getCurrentQuestion();
+            if(((a == 1)&&(g3Questionnaire.getCorrectAnswer(cQuestion) == "true"))
+           ||((a == 2) && (g3Questionnaire.getCorrectAnswer(cQuestion) == "false"))){
+                correct = true;
+            }
+        }
         return correct;
     }
 
@@ -258,7 +283,6 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             if(clicked == toMainMenu){
                 titlePanel.setPreferredSize(new Dimension(590, 300));
                 rightPanel = mainMenuPanel;
-                
             }else{
                 titlePanel.setPreferredSize(new Dimension(400, 300));
                 if(clicked == toAbout){
@@ -273,50 +297,80 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 }
             }
             add(rightPanel);
-            
         }
         
         repaint();
         revalidate();
     }
-    
+
     @Override
     public void keyReleased(KeyEvent e) {
-        //*whole
         boolean isKeyCorrect = false;
+        int gameNumber = 0;
+        int keyNumber = 0;
         int key = e.getKeyCode();
         
         if(key == KeyEvent.VK_LEFT){
             isKeyCorrect = true;
-            System.out.print("pressed");
+            keyNumber = 1;
+            gameNumber = 1;
         }
         if(key == KeyEvent.VK_RIGHT){
             isKeyCorrect = true;
-            
+            keyNumber = 2;
+            gameNumber = 1;     
         }
         if(key == KeyEvent.VK_UP){
             isKeyCorrect = true;
-            
+            keyNumber = 1;
+            gameNumber = 2;
         }
         if(key == KeyEvent.VK_DOWN){
             isKeyCorrect = true;
-            
+            keyNumber = 2;
+            gameNumber = 2;
         }
         if(key == KeyEvent.VK_W){
             isKeyCorrect = true;
-            
+            keyNumber = 1;
+            gameNumber = 3;
         }
         if(key == KeyEvent.VK_A){
             isKeyCorrect = true;
-            
+            keyNumber = 2;
+            gameNumber = 3;
         }
         if(key == KeyEvent.VK_S){
             isKeyCorrect = true;
-            
+            keyNumber = 3;
+            gameNumber = 3;
         }
         if(key == KeyEvent.VK_D){
             isKeyCorrect = true;
+            keyNumber = 4;
+            gameNumber = 3;
+        }
+        if(isKeyCorrect){
+            boolean correct = false;
+            correct = checkAnswer(gameNumber, keyNumber);
             
+            if(correct){
+                if(gameNumber == 1){
+                    if(!g1Questionnaire.nextQuestion()){
+                        isG1End = true;
+                    }
+                }else if(gameNumber == 2){
+                    if(!g2Questionnaire.nextQuestion()){
+                        isG2End = true;
+                    }
+                }else if(gameNumber == 3){
+                    if(!g3Questionnaire.nextQuestion()){
+                        isG3End = true;
+                    }
+                }
+                
+                updateQuestionPanel();
+            }
         }
     }
 
