@@ -9,13 +9,56 @@ public class Questionnaire{
     private String[] questions;
     private String[] correctAns;
     private String[] wrongAns;
-
+    
+    ArrayList<Integer> correctAnsIndex = new ArrayList<Integer>();
     ArrayList<Integer> questionsSelected = new ArrayList<Integer>();
 
     public Questionnaire(String[] questions, String[] correctAns, String[] wrongAns){
         this.questions = questions;
         this.correctAns = correctAns;
         this.wrongAns = wrongAns;
+    }
+    
+    public String getQuestion(int i){
+        return questions[i];
+    }
+
+    public String getCorrectAnswer(int i){
+        return correctAns[i];
+    }
+    
+    public String getWrongAnswer(int i){
+        return wrongAns[i];
+    }
+    
+    public int getCorrectAnswerIndex(){
+        return correctAnsIndex.get(0);
+    }
+    
+    public int getCurrentQuestion(){
+        return questionsSelected.get(0);
+    }
+
+    public String[] getChoices(int i){
+        String[] choices;
+        //Simplicity's sake; so that all answers are in one side for Game 1
+        int random = (int)(Math.random() * 2);
+        if(random == 0){
+            choices = new String[]{correctAns[i], wrongAns[i]};
+            correctAnsIndex.add(1);
+        }
+        else{
+            choices = new String[]{wrongAns[i], correctAns[i]};
+            correctAnsIndex.add(2);
+        }
+        return choices;
+    }
+    
+    public void resetQuestionnaire(){
+        questionsSelected.clear();
+        for(int i = 0;i < numQuestions;i++){
+            selectQuestion();
+        }
     }
 
     public String selectQuestion(){
@@ -34,35 +77,11 @@ public class Questionnaire{
         return question;
     }
     
-    public String getQuestion(int i){
-        return questions[i];
-    }
-
-    public String[] getChoices(int i){
-        String[] choices;
-        //Simplicity's sake; so that all answers are in one side for Game 1
-        int random = (int)(Math.random() * 2);
-        if(random == 0){
-            choices = new String[]{correctAns[i], wrongAns[i]};
-        }
-        else{
-            choices = new String[]{wrongAns[i], correctAns[i]};
-        }
-        return choices;
-    }
-
-    public String getAnswer(int i){
-        return correctAns[i];
-    }
-    
-    public void resetQuestionnaire(){
-        questionsSelected.clear();
-        for(int i = 0;i < numQuestions;i++){
-            selectQuestion();
-        }
-    }
-    
     public boolean nextQuestion(){
-        return questionsSelected.remove(int.class);
+        if(!questionsSelected.isEmpty()){
+            questionsSelected.remove(0);
+            correctAnsIndex.remove(0);
+        }
+        return !questionsSelected.isEmpty();
     }
 }
