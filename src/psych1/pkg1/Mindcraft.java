@@ -2,6 +2,7 @@ package psych1.pkg1;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import javax.swing.Box;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -65,7 +67,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private boolean isEnd = false;
     private int wrongAnsCount;
     private int finalTime;
-
+    
     public Mindcraft(){
         super("MINDCRAFT");
         setLayout(new BorderLayout());
@@ -81,10 +83,24 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         mainMenuPanel.setPreferredSize(new Dimension(590, 720));
         mainMenuPanel.setBackground(Color.gray);
         mainMenuPanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.Y_AXIS));
+        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,65)));
         mainMenuPanel.add(toGame);
+        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
         mainMenuPanel.add(toAbout);
+        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
         mainMenuPanel.add(toInstructions);
+        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
         mainMenuPanel.add(toReviewer);
+        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,65)));
+
+        toGame.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toAbout.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toInstructions.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toReviewer.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toGame.add(Box.createRigidArea(new Dimension(100,30)));
+        toAbout.add(Box.createRigidArea(new Dimension(100,30)));
+        toInstructions.add(Box.createRigidArea(new Dimension(100,30)));
+        toReviewer.add(Box.createRigidArea(new Dimension(100,30)));
 
     //About Panel
         aboutPanel.setPreferredSize(new Dimension(780, 720));
