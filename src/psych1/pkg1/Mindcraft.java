@@ -192,18 +192,18 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             
         try {
             for(String s: fileList){
-                questionList = new ArrayList<String>();
+                questionList = new ArrayList<String>();                                     //Ano difference nito sa Questionnaire.java na String[] questions, String[] correctAns, String[] wrongAns??
                 correctAnsList = new ArrayList<String>();
                 wrongAnsList = new ArrayList<String>();
                 split = new String[3];
-
+                
                 //reads file and separates per line by % and stores into arraylists
                 BufferedReader reader = new BufferedReader(new FileReader(s));
                 while((line = reader.readLine()) != null) {
                     split = line.split("%");
                     questionList.add(split[0]);
-                    correctAnsList.add(split[1]);
-                    wrongAnsList.add(split[2]);
+                    correctAnsList.add(split[1]);                                           //Just wondering, why make the correct and wrong answer == to the actual words and not just left/right??
+                    wrongAnsList.add(split[2]);                                             //How does it change from 1 question to the next?
                 }
                 //data structure change: ArrayList to Array
                 String[] tempQArray = new String[questionList.size()];
@@ -247,14 +247,14 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     }
     
     private void resetGame(){
-        g1Questionnaire.resetQuestionnaire();
+        g1Questionnaire.resetQuestionnaire();                                           //To what extent are the effects of resetQuestionnaire?
         g2Questionnaire.resetQuestionnaire();
         g3Questionnaire.resetQuestionnaire();
     }
     
     private void updateQuestionPanel(){
         /*
-            DITO MO LAGAY PAGPALIT NG QUESTION       
+            DITO MO LAGAY PAGPALIT NG QUESTION                                          
         */
     }
     
@@ -265,7 +265,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 correct = true;
             }
         }else if(i == 2){
-            int cQuestion = g3Questionnaire.getCurrentQuestion();
+            int cQuestion = g3Questionnaire.getCurrentQuestion();                       //g3Question ba talaga dito?
             if(((a == 1)&&(g2Questionnaire.getCorrectAnswer(cQuestion) == "W"))
            ||((a == 2) && (g2Questionnaire.getCorrectAnswer(cQuestion) == "A"))
            ||((a == 3) && (g2Questionnaire.getCorrectAnswer(cQuestion) == "S"))
@@ -285,6 +285,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
 
     @Override
     public void actionPerformed(ActionEvent a) {
+        System.out.println("reached actionPerformed");                                     //As opposed to this? (In relation to question in line 324
         JButton clicked = (JButton)a.getSource();
         remove(rightPanel);
         
@@ -292,7 +293,6 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             isInGame = true;
             remove(titlePanel);
             add(gamePanel);
-            System.out.println("GOT HERE");
             //startGame();
         }else{
             //replaces rightPanel components to clicked button while titlePanel is the same
@@ -321,11 +321,12 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
+        System.out.println("reached keyReleased");                                       //Why doesn't this print upon clicking the Start button?
         boolean isKeyCorrect = false;
         int gameNumber = 0;
         int keyNumber = 0;
         int key = e.getKeyCode();
-        
+                                              
         if(key == KeyEvent.VK_LEFT){
             isKeyCorrect = true;
             keyNumber = 1;
