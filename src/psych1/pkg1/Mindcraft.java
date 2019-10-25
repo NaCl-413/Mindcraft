@@ -139,16 +139,11 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         reviewerPanel.add(reviewerTitle, BorderLayout.NORTH);
         reviewerPanel.add(reviewerPane,BorderLayout.CENTER);
         
-    //Game Panel
-        gamePanel.setPreferredSize(new Dimension(1280, 720));
-        gamePanel.setBackground(Color.gray);
-        
-    //Game Interface (Timer and Main Menu
+    //Game Interface (Timer and Main Menu)
         gameInterface.setPreferredSize(new Dimension(1250, 30));
         gameInterface.setLayout(new BorderLayout());  
         gameInterface.add(gameTimer, BorderLayout.CENTER);
         gameInterface.add(startGame, BorderLayout.WEST);
-        
         
     //Game1 Panel
         game1Panel.setPreferredSize(new Dimension(1250, 310));
@@ -178,6 +173,10 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         /*
             DITO MO LAGAY COMPONENTS NG GAME 3        
         */
+        
+    //Game Panel
+        gamePanel.setPreferredSize(new Dimension(1280, 720));
+        gamePanel.setBackground(Color.gray);
         gamePanel.add(gameInterface, BorderLayout.PAGE_START);
         gamePanel.add(game1Panel, BorderLayout.NORTH);
         gamePanel.add(game2Panel, BorderLayout.WEST);
@@ -290,22 +289,20 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private boolean checkAnswer(int i, int a){
         boolean correct = false;
         if(i == 1){
-            if(a == g1Questionnaire.getCorrectAnswerIndex()){
+            if(a == g1Questionnaire.getCurCorrectChoiceIndex()){
                 correct = true;
             }
         }else if(i == 2){
-            int cQuestion = g2Questionnaire.getCurrentQuestionIndex();
-            if(((a == 1)&&(g2Questionnaire.getCorrectAnswer(cQuestion) == "W"))
-           ||((a == 2) && (g2Questionnaire.getCorrectAnswer(cQuestion) == "A"))
-           ||((a == 3) && (g2Questionnaire.getCorrectAnswer(cQuestion) == "S"))
-           ||((a == 4) && (g2Questionnaire.getCorrectAnswer(cQuestion) == "D"))){
+            if(((a == 1)&&(g2Questionnaire.getCurCorrectAns() == "W"))
+           ||((a == 2) && (g2Questionnaire.getCurCorrectAns() == "A"))
+           ||((a == 3) && (g2Questionnaire.getCurCorrectAns() == "S"))
+           ||((a == 4) && (g2Questionnaire.getCurCorrectAns() == "D"))){
                 correct = true;
             }
             
         }else if(i == 3){
-            int cQuestion = g3Questionnaire.getCurrentQuestionIndex();
-            if(((a == 1)&&(g3Questionnaire.getCorrectAnswer(cQuestion) == "true"))
-           ||((a == 2) && (g3Questionnaire.getCorrectAnswer(cQuestion) == "false"))){
+            if(((a == 1)&&(g3Questionnaire.getCurCorrectAns() == "true"))
+           ||((a == 2) && (g3Questionnaire.getCurCorrectAns() == "false"))){
                 correct = true;
             }
         }
@@ -325,15 +322,12 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             gameInterface.add(toMainMenu, BorderLayout.EAST);
             add(gamePanel);
             startGame();
-            
-            
         }else{
             //replaces rightPanel components to clicked button while titlePanel is the same
             if(clicked == toMainMenu){
                 remove(gamePanel);
                 titlePanel.setPreferredSize(new Dimension(590, 300));
                 rightPanel = mainMenuPanel;
-                
             }else{
                 titlePanel.setPreferredSize(new Dimension(400, 300));
                 if(clicked == toAbout){
