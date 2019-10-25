@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Questionnaire{
     //how many will be asked
-    private int numQuestions = 10;
+    private int numQuestions = 1;
     
     private String[] questions;
     private String[] correctAns;
@@ -35,7 +35,7 @@ public class Questionnaire{
         return correctAnsIndex.get(0);
     }
     
-    public int getCurrentQuestion(){
+    public int getCurrentQuestionIndex(){
         return questionsSelected.get(0);
     }
 
