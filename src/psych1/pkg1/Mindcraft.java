@@ -49,10 +49,10 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     
     private JButton toMainMenu = new JButton("MAIN MENU");
     private JButton toGame = new JButton("START");
-    private JButton startGame = new JButton("START GAME");
     private JButton toAbout = new JButton("ABOUT");
     private JButton toInstructions = new JButton("INSTRUCTIONS");
     private JButton toReviewer = new JButton("REVIEWER");
+        private JButton startGame = new JButton("START GAME");  //Tentative start button for the game
 
     private JLabel mainTitle = new JLabel("MindCraft", JLabel.CENTER);
     private JLabel aboutTitle = new JLabel("ABOUT", JLabel.CENTER);
@@ -87,14 +87,14 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     public Mindcraft(){
         super("MINDCRAFT");
         setLayout(new BorderLayout());
-
+        
     //Panel Initializations(Init)
     //Title Panel
         titlePanel.setPreferredSize(new Dimension(590, 720));
         titlePanel.setBackground(Color.cyan);
         titlePanel.setLayout(new BorderLayout());
         titlePanel.add(mainTitle, BorderLayout.CENTER);
-
+        
     //Main Menu Panel
         mainMenuPanel.setPreferredSize(new Dimension(590, 720));
         mainMenuPanel.setBackground(Color.gray);
@@ -147,7 +147,6 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         gameInterface.setPreferredSize(new Dimension(1250, 30));
         gameInterface.setLayout(new BorderLayout());  
         gameInterface.add(gameTimer, BorderLayout.CENTER);
-        gameInterface.add(toMainMenu, BorderLayout.EAST);
         gameInterface.add(startGame, BorderLayout.WEST);
         
         
@@ -158,17 +157,9 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         game1Panel.add(game1Question, BorderLayout.SOUTH);
         game1Panel.add(game1OptionR, BorderLayout.EAST);
         game1Panel.add(game1OptionL, BorderLayout.WEST);
-        /**/
-            
-
-        
-        
-        
-        
-        
-        
-        
-        /**/
+       /*
+            DITO MO LAGAY COMPONENTS NG GAME 1       
+        */
         
     //Game2 Panel
         game2Panel.setPreferredSize(new Dimension(625, 310));
@@ -320,25 +311,29 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         }
         return correct;
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent a) {
         System.out.println("reached actionPerformed");
         JButton clicked = (JButton)a.getSource();
         remove(rightPanel);
+
         
         if(clicked == toGame){
             isInGame = true;
-            
-            remove(titlePanel);
+            titlePanel.setPreferredSize(new Dimension(0, 0));
+            gameInterface.add(toMainMenu, BorderLayout.EAST);
             add(gamePanel);
-            
             startGame();
+            
+            
         }else{
             //replaces rightPanel components to clicked button while titlePanel is the same
             if(clicked == toMainMenu){
+                remove(gamePanel);
                 titlePanel.setPreferredSize(new Dimension(590, 300));
                 rightPanel = mainMenuPanel;
+                
             }else{
                 titlePanel.setPreferredSize(new Dimension(400, 300));
                 if(clicked == toAbout){
