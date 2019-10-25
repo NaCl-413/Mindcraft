@@ -50,6 +50,10 @@ public class Questionnaire{
         return getCorrectAnswer(getCurQuestionIndex());
     }
     
+    public String getCurWrongAns(){
+        return getWrongAnswer(getCurQuestionIndex());
+    }
+    
     public int getCurCorrectChoiceIndex(){
         return correctChoiceIndex.get(0);
     }
