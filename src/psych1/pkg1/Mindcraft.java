@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -42,12 +43,14 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JPanel aboutPanel = new JPanel();
     private JPanel instructionsPanel = new JPanel();
     private JPanel reviewerPanel = new JPanel();
+    private JPanel gameInterface = new JPanel();
     private JPanel game1Panel = new JPanel();
     private JPanel game2Panel = new JPanel();
     private JPanel game3Panel = new JPanel();
 
     private JButton toMainMenu = new JButton("MAIN MENU");
     private JButton toGame = new JButton("START");
+    private JButton startGame = new JButton("START GAME");
     private JButton toAbout = new JButton("ABOUT");
     private JButton toInstructions = new JButton("INSTRUCTIONS");
     private JButton toReviewer = new JButton("REVIEWER");
@@ -56,9 +59,18 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JLabel aboutTitle = new JLabel("ABOUT", JLabel.CENTER);
     private JLabel instructionsTitle = new JLabel("INSTRUCTIONS", JLabel.CENTER);
     private JLabel reviewerTitle = new JLabel("REVIEWER", JLabel.CENTER);
+    
     private JLabel game1Title = new JLabel("GAME 1", JLabel.CENTER);
+    private JLabel game1Question = new JLabel("QUESTION: ", JLabel.CENTER);
+    private JLabel game1OptionR = new JLabel("OPTION RIGHT", JLabel.CENTER);
+    private JLabel game1OptionL = new JLabel("OPTION LEFT", JLabel.CENTER);
+    
     private JLabel game2Title = new JLabel("GAME 2", JLabel.CENTER);
+    private JLabel game2Pattern = new JLabel("WADSWSDAW", JLabel.CENTER);
+    private JLabel game2UserInput = new JLabel("WADS", JLabel.CENTER);
+    
     private JLabel game3Title = new JLabel("GAME 3", JLabel.CENTER);
+    private JLabel gameTimer = new JLabel("Time (00 : 00)", JLabel.CENTER);
         
     private Questionnaire g1Questionnaire;
     private Questionnaire g2Questionnaire;
@@ -126,37 +138,51 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         reviewerPanel.setLayout(new BorderLayout());
         reviewerPanel.add(reviewerTitle, BorderLayout.NORTH);
         reviewerPanel.add(reviewerPane,BorderLayout.CENTER);
-
+        
     //Game Panel
-        gamePanel.setPreferredSize(new Dimension(1180, 720));
+        gamePanel.setPreferredSize(new Dimension(1280, 720));
         gamePanel.setBackground(Color.gray);
+        
+    //Game Interface (Timer and Main Menu
+        gameInterface.setPreferredSize(new Dimension(1250, 30));
+        gameInterface.setLayout(new BorderLayout());  
+        gameInterface.add(gameTimer, BorderLayout.CENTER);
+        gameInterface.add(toMainMenu, BorderLayout.EAST);
+        gameInterface.add(startGame, BorderLayout.WEST);
+        
+        
     //Game1 Panel
-        game1Panel.setPreferredSize(new Dimension(1180, 360));
+        game1Panel.setPreferredSize(new Dimension(1250, 310));
         game1Panel.setLayout(new BorderLayout());
         game1Panel.add(game1Title, BorderLayout.CENTER);
+        game1Panel.add(game1Question, BorderLayout.SOUTH);
+        game1Panel.add(game1OptionR, BorderLayout.EAST);
+        game1Panel.add(game1OptionL, BorderLayout.WEST);
         /*
             DITO MO LAGAY COMPONENTS NG GAME 1        
         */
         
     //Game2 Panel
-        game2Panel.setPreferredSize(new Dimension(590, 360));
+        game2Panel.setPreferredSize(new Dimension(625, 310));
         game2Panel.setLayout(new BorderLayout());
         game2Panel.add(game2Title, BorderLayout.CENTER);
+        game2Panel.add(game2Pattern, BorderLayout.NORTH);
+        game2Panel.add(game2UserInput, BorderLayout.SOUTH);
         /*
             DITO MO LAGAY COMPONENTS NG GAME 2        
         */
         
     //Game3 Panel
-        game3Panel.setPreferredSize(new Dimension(590, 360));
+        game3Panel.setPreferredSize(new Dimension(625, 310));
         game3Panel.setLayout(new BorderLayout());
         game3Panel.add(game3Title, BorderLayout.CENTER);
         /*
             DITO MO LAGAY COMPONENTS NG GAME 3        
         */
-        
-        gamePanel.add(game1Panel);
-        gamePanel.add(game2Panel);
-        gamePanel.add(game3Panel);
+        gamePanel.add(gameInterface, BorderLayout.PAGE_START);
+        gamePanel.add(game1Panel, BorderLayout.NORTH);
+        gamePanel.add(game2Panel, BorderLayout.WEST);
+        gamePanel.add(game3Panel, BorderLayout.EAST);
 
     //Buttons Init
         toMainMenu.addActionListener(this);
