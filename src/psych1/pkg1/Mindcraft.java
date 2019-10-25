@@ -13,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import javax.swing.Box;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,13 +27,9 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private String q2File = "questionnaire2.txt";
     private String q3File = "questionnaire3.txt";
     
-    
-    ImageIcon instructionsImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
-    JScrollPane instructionsPane = new JScrollPane(new JLabel(instructionsImage));
-    ImageIcon reviewerImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
-    JScrollPane reviewerPane = new JScrollPane(new JLabel(reviewerImage));
-    ImageIcon aboutImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
-    JScrollPane aboutPane = new JScrollPane(new JLabel(aboutImage));
+    private ImageIcon aboutImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
+    private ImageIcon instructionsImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
+    private ImageIcon reviewerImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
     
     private JPanel titlePanel = new JPanel();
     private JPanel rightPanel = new JPanel();
@@ -47,7 +42,11 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JPanel game1Panel = new JPanel();
     private JPanel game2Panel = new JPanel();
     private JPanel game3Panel = new JPanel();
-
+    
+    private JScrollPane instructionsPane = new JScrollPane(new JLabel(instructionsImage));
+    private JScrollPane reviewerPane = new JScrollPane(new JLabel(reviewerImage));
+    private JScrollPane aboutPane = new JScrollPane(new JLabel(aboutImage));
+    
     private JButton toMainMenu = new JButton("MAIN MENU");
     private JButton toGame = new JButton("START");
     private JButton startGame = new JButton("START GAME");
@@ -72,6 +71,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JLabel game3Title = new JLabel("GAME 3", JLabel.CENTER);
     private JLabel gameTimer = new JLabel("Time (00 : 00)", JLabel.CENTER);
         
+    
     private Questionnaire g1Questionnaire;
     private Questionnaire g2Questionnaire;
     private Questionnaire g3Questionnaire;
@@ -158,9 +158,17 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         game1Panel.add(game1Question, BorderLayout.SOUTH);
         game1Panel.add(game1OptionR, BorderLayout.EAST);
         game1Panel.add(game1OptionL, BorderLayout.WEST);
-        /*
-            DITO MO LAGAY COMPONENTS NG GAME 1        
-        */
+        /**/
+            
+
+        
+        
+        
+        
+        
+        
+        
+        /**/
         
     //Game2 Panel
         game2Panel.setPreferredSize(new Dimension(625, 310));
@@ -202,6 +210,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         rightPanel = mainMenuPanel;
         add(titlePanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.CENTER);
+        
     }
     
     private Questionnaire[] questionnaireInit(){
@@ -218,7 +227,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             
         try {
             for(String s: fileList){
-                questionList = new ArrayList<String>();                                     //Ano difference nito sa Questionnaire.java na String[] questions, String[] correctAns, String[] wrongAns??
+                questionList = new ArrayList<String>();
                 correctAnsList = new ArrayList<String>();
                 wrongAnsList = new ArrayList<String>();
                 split = new String[3];
@@ -228,8 +237,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 while((line = reader.readLine()) != null) {
                     split = line.split("%");
                     questionList.add(split[0]);
-                    correctAnsList.add(split[1]);                                           //Just wondering, why make the correct and wrong answer == to the actual words and not just left/right??
-                    wrongAnsList.add(split[2]);                                             //How does it change from 1 question to the next?
+                    correctAnsList.add(split[1]);
+                    wrongAnsList.add(split[2]);
                 }
                 //data structure change: ArrayList to Array
                 String[] tempQArray = new String[questionList.size()];
@@ -254,26 +263,29 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     }
     
     private void startGame(){
+        gamePanel.requestFocusInWindow();
         resetGame();
         int startTime = (int)System.currentTimeMillis()/1000;
         int prevTime = startTime;
         int currentTime;
+        /*
         while(!isEnd){
             currentTime = (int)System.currentTimeMillis()/1000;
             //1 frame per sec
             if(currentTime == prevTime){
-                /*
+                
                     DITO MO LAGAY PAGPALIT NG TIMER SA PANEL        
-                */
+                
                 revalidate();
                 repaint();
             }
             //*if game1, game2 and game3 is finished then isEnd = true
         }
+        */
     }
     
     private void resetGame(){
-        g1Questionnaire.resetQuestionnaire();                                           //To what extent are the effects of resetQuestionnaire?
+        g1Questionnaire.resetQuestionnaire();
         g2Questionnaire.resetQuestionnaire();
         g3Questionnaire.resetQuestionnaire();
     }
@@ -291,7 +303,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 correct = true;
             }
         }else if(i == 2){
-            int cQuestion = g3Questionnaire.getCurrentQuestion();                       //g3Question ba talaga dito?
+            int cQuestion = g2Questionnaire.getCurrentQuestionIndex();
             if(((a == 1)&&(g2Questionnaire.getCorrectAnswer(cQuestion) == "W"))
            ||((a == 2) && (g2Questionnaire.getCorrectAnswer(cQuestion) == "A"))
            ||((a == 3) && (g2Questionnaire.getCorrectAnswer(cQuestion) == "S"))
@@ -300,7 +312,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             }
             
         }else if(i == 3){
-            int cQuestion = g3Questionnaire.getCurrentQuestion();
+            int cQuestion = g3Questionnaire.getCurrentQuestionIndex();
             if(((a == 1)&&(g3Questionnaire.getCorrectAnswer(cQuestion) == "true"))
            ||((a == 2) && (g3Questionnaire.getCorrectAnswer(cQuestion) == "false"))){
                 correct = true;
@@ -311,15 +323,17 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
 
     @Override
     public void actionPerformed(ActionEvent a) {
-        System.out.println("reached actionPerformed");                                     //As opposed to this? (In relation to question in line 324
+        System.out.println("reached actionPerformed");
         JButton clicked = (JButton)a.getSource();
         remove(rightPanel);
         
         if(clicked == toGame){
             isInGame = true;
+            
             remove(titlePanel);
             add(gamePanel);
-            //startGame();
+            
+            startGame();
         }else{
             //replaces rightPanel components to clicked button while titlePanel is the same
             if(clicked == toMainMenu){
@@ -347,7 +361,6 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("reached keyReleased");                                       //Why doesn't this print upon clicking the Start button?
         boolean isKeyCorrect = false;
         int gameNumber = 0;
         int keyNumber = 0;
@@ -419,12 +432,16 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{}catch(Exception ex){
+            System.out.println(ex);
+        }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{}catch(Exception ex){
+            System.out.println(ex);
+        }
     }
     
 }
