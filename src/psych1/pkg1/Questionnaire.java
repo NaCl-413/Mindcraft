@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Questionnaire{
     //how many will be asked
-    private int numQuestions = 10;
+    private int numQuestions = 1;
     
     private String[] questions;
     private String[] correctAns;
@@ -22,7 +22,7 @@ public class Questionnaire{
     public String getQuestion(int i){
         return questions[i];
     }
-
+    
     public String getCorrectAnswer(int i){
         return correctAns[i];
     }
@@ -35,10 +35,10 @@ public class Questionnaire{
         return correctAnsIndex.get(0);
     }
     
-    public int getCurrentQuestion(){
+    public int getCurrentQuestionIndex(){
         return questionsSelected.get(0);
     }
-
+    
     public String[] getChoices(int i){
         String[] choices;
         //Simplicity's sake; so that all answers are in one side for Game 1
