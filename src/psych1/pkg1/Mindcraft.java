@@ -158,7 +158,6 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         game1Panel.add(game1Title, BorderLayout.CENTER);
         game1Panel.add(game1Question, BorderLayout.SOUTH);
         game1Question.setFont (f);
-        System.out.println(game1Question.getFont ());
         game1Panel.add(game1OptionR, BorderLayout.EAST);
         game1Panel.add(game1OptionL, BorderLayout.WEST);
        /*
@@ -325,13 +324,20 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         
         if(game == 1){
         game1Question.setText("<html>Question:  "+ g1Questionnaire.getCurQuestion() +"<br><br/>"+"</html>");
+        game1OptionR.setText(Arrays.toString(g1Questionnaire.getCurChoices()));
         }else if (game == 2){
         game2Pattern.setText(g2Questionnaire.getCurQuestion());
         }else if (game == 3){
         game3Shape.setText(g3Questionnaire.getCurQuestion());
         }else if (game == 4){  //Means that it will need to update all 3 games
+            //game 1
             game1Question.setText("<html>Question:  "+ g1Questionnaire.getCurQuestion() +"<br><br/>"+"</html>");
+            game1OptionR.setText(Arrays.toString(g1Questionnaire.getCurChoices()));
+            System.out.println(Arrays.toString(g1Questionnaire.getCurChoices()));
+            //game 2
             game2Pattern.setText(g2Questionnaire.getCurQuestion());
+            
+            //game 3
             game3Shape.setText(g3Questionnaire.getCurQuestion());
         }
         
@@ -385,7 +391,6 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             }else{
                 titlePanel.setPreferredSize(new Dimension(400, 300));
                 if(clicked == toAbout){
-                    gameEnd(4);
                     rightPanel = aboutPanel;
                     aboutPanel.add(toMainMenu, BorderLayout.PAGE_END);
                 }else if(clicked == toInstructions){

@@ -50,7 +50,7 @@ public class Questionnaire{
         return getCorrectAnswer(getCurQuestionIndex());
     }
     
-    public String getCurWrongAns(){
+    public String getCurWrongAnswer(){                                  //Not sure kung ito tinutukoy mo CJ na gawin kong "Answer" yung "Ans"
         return getWrongAnswer(getCurQuestionIndex());
     }
     
@@ -80,7 +80,7 @@ public class Questionnaire{
         }
         questionsChoices.add(choices);
     }
-
+    
     public int selectQuestion(){
         //randomizes what question to get
         int qNum = (int)(Math.random() * questions.length);
