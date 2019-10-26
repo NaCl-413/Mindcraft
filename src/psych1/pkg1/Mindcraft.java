@@ -24,11 +24,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class Mindcraft extends JFrame implements ActionListener, KeyListener{
-
+    
     private String q1File = "questionnaires/questionnaire1.txt";
     private String q2File = "questionnaires/questionnaire2.txt";
     private String q3File = "questionnaires/questionnaire3.txt";
-
     
     private ImageIcon aboutImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
     private ImageIcon instructionsImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
@@ -342,6 +341,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     public void actionPerformed(ActionEvent a) {
         JButton clicked = (JButton)a.getSource();
         remove(rightPanel);
+
         if(clicked == toGame){
             titlePanel.setPreferredSize(new Dimension(0, 0));
             gameInterface.add(toMainMenu, BorderLayout.EAST);
@@ -440,7 +440,6 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                         isG3End = true;
                     }
                 }
-
             }
             
             updateQuestionPanel();
