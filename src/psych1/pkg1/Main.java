@@ -16,6 +16,7 @@ public class Main {
                 Mindcraft g = new Mindcraft();
                 
                 g.setSize(1280,720);
+                g.setLocationRelativeTo(null);
                 g.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 g.setVisible(true);
             }
