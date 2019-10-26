@@ -308,7 +308,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             game2Pattern.setText(g2Questionnaire.getCurQuestion());
             
             //game 3
-            game3Shape.setText(g3Questionnaire.getCurQuestion());
+            game3Shape.setText("");
+            game3Shape.setIcon(new ImageIcon(g3Questionnaire.getCurQuestion()));
         
     }
     
