@@ -282,6 +282,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 revalidate();
                 repaint();
             }
+            //To indicate that the games have been finished
             if((isG1End == true)&&(isG2End == true)&&(isG3End == true))
                 isEnd = true;
         }
@@ -293,7 +294,31 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         g2Questionnaire.resetQuestionnaire();
         g3Questionnaire.resetQuestionnaire();
     }
-    //To indicate that the games have been finished
+    
+    private void processKeys(int gameNumber, int keyNumber){
+        boolean correct = checkAnswer(gameNumber, keyNumber);
+
+        if(correct){
+            if(gameNumber == 1){
+                if(!g1Questionnaire.nextQuestion()){
+                    isG1End = true;
+                    game1Question.setText("");
+                    game1OptionR.setText("");
+                    game1OptionL.setText("");
+                }
+            }else if(gameNumber == 2){
+                if(!g2Questionnaire.nextQuestion()){
+                    isG2End = true;
+                }
+            }else if(gameNumber == 3){
+                if(!g3Questionnaire.nextQuestion()){
+                    isG3End = true;
+                }
+            }
+        }
+
+        updateQuestionPanel();
+    }
     
     //Gets the next question and displays it
     private void updateQuestionPanel(){
@@ -312,10 +337,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         
     }
     
-
-    
     private boolean checkAnswer(int i, int a){
-        
         boolean correct = false;
         if(i == 1){
             if(a == g1Questionnaire.getCurCorrectChoiceIndex())
@@ -423,26 +445,13 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             gameNumber = 3;
             game2UserInput.setText(game2UserInput.getText()+"D");
         }
+            
         if(isKeyCorrect){
-            boolean correct = checkAnswer(gameNumber, keyNumber);
-            
-            if(correct){
-                if(gameNumber == 1){
-                    if(!g1Questionnaire.nextQuestion()){
-                        isG1End = true;
-                    }
-                }else if(gameNumber == 2){
-                    if(!g2Questionnaire.nextQuestion()){
-                        isG2End = true;
-                    }
-                }else if(gameNumber == 3){
-                    if(!g3Questionnaire.nextQuestion()){
-                        isG3End = true;
-                    }
-                }
+            if(((gameNumber == 1)&&(isG1End == false))||
+               ((gameNumber == 2)&&(isG2End == false))||
+               ((gameNumber == 3)&&(isG3End == false))){
+                processKeys(gameNumber, keyNumber);
             }
-            
-            updateQuestionPanel();
         }
     }
     
