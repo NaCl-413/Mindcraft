@@ -86,6 +86,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private boolean isG2End = false;
     private boolean isG3End = false;
     private int wrongAnsCount;
+    private int startTime;
+    private int currentTime;
     private int finalTime;
     private int finalScore;
     
@@ -251,7 +253,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 //adds Questionnaire to arraylist
                 masterList.add(new Questionnaire(tempQArray,tempCArray,tempWArray));
                 reader.close();
-                 
+                
             }
         }catch(Exception e){
             System.out.println(e);
@@ -266,9 +268,9 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private void startGame(){
         gamePanel.requestFocusInWindow();
         resetGame();
-        int startTime = (int)System.currentTimeMillis()/1000;
+        startTime = (int)System.currentTimeMillis()/1000;
         int prevTime = startTime;
-        int currentTime;
+        currentTime = (int)System.currentTimeMillis()/1000; System.out.println(startTime + "//" + currentTime);
         updateQuestionPanel();
         
         /*
@@ -282,6 +284,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 revalidate();
                 repaint();
             }
+            //To indicate that the games have been finished
             if((isG1End == true)&&(isG2End == true)&&(isG3End == true))
                 isEnd = true;
         }
@@ -293,7 +296,31 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         g2Questionnaire.resetQuestionnaire();
         g3Questionnaire.resetQuestionnaire();
     }
-    //To indicate that the games have been finished
+    
+    private void processKeys(int gameNumber, int keyNumber){
+        boolean correct = checkAnswer(gameNumber, keyNumber);
+        if(correct){
+            System.out.println("PREDICTING AN ERROR");
+            if(gameNumber == 1){
+                if(!g1Questionnaire.nextQuestion()){
+                    isG1End = true;
+                    game1Question.setText("");
+                    game1OptionR.setText("");
+                    game1OptionL.setText("");
+                }
+            }else if(gameNumber == 2){
+                if(!g2Questionnaire.nextQuestion()){
+                    isG2End = true;
+                }
+            }else if(gameNumber == 3){
+                if(!g3Questionnaire.nextQuestion()){
+                    isG3End = true;
+                }
+            }
+        }
+        
+        updateQuestionPanel();
+    }
     
     //Gets the next question and displays it
     private void updateQuestionPanel(){
@@ -301,8 +328,9 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             //game 1
             String[] temp1Array = g1Questionnaire.getCurChoices();
             game1Question.setText("<html>Question:  "+ g1Questionnaire.getCurQuestion() +"<br><br/>"+"</html>");
-            game1OptionR.setText(temp1Array[0]);
-            game1OptionL.setText(temp1Array[1]);
+            game1OptionR.setText(temp1Array[1]);
+            game1OptionL.setText(temp1Array[0]);
+            System.out.println("THIS SHOULD BE THE CORRECT ANSWER: "+ g1Questionnaire.getCurCorrectAns());
             
             //game 2
             game2Pattern.setText(g2Questionnaire.getCurQuestion());
@@ -315,22 +343,23 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         
     }
     
-    public void screenFlicker () {
-        //Dito yung pagpalit ng red for a frame nung screen
-        
-    }    
     private boolean checkAnswer(int i, int a){
-        System.out.println("Reached checkAnswer"+ i + a);
+        System.out.println(g1Questionnaire.getCurCorrectChoiceIndex());
+        System.out.println("Answer Checked: "+i+a);
         boolean correct = false;
         if(i == 1){
             if(a == g1Questionnaire.getCurCorrectChoiceIndex())
                 correct = true;
         }else if(i == 2){
-            if(((a == 1)&&(g2Questionnaire.getCurCorrectAns() == "W"))
-           ||((a == 2) && (g2Questionnaire.getCurCorrectAns() == "A"))
-           ||((a == 3) && (g2Questionnaire.getCurCorrectAns() == "S"))
-           ||((a == 4) && (g2Questionnaire.getCurCorrectAns() == "D"))){
+            System.out.println("REACHED IF STATEMENT");
+            if(((a == 1)&&("W".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))
+           ||((a == 2) && ("A".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))
+           ||((a == 3) && ("S".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))
+           ||((a == 4) && ("D".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))){
                 correct = true;
+                System.out.println("Correct answer");
+            } else {
+                System.out.println("Wrong answer");
             }
             
         }else if(i == 3){
@@ -339,6 +368,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 correct = true;
             }
         }
+        System.out.println(correct);
         return correct;
     }
     
@@ -403,6 +433,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             isKeyCorrect = true;
             keyNumber = 2;
             gameNumber = 3;
+            finalTime = currentTime-startTime;
+            currentTime = (int)System.currentTimeMillis()/1000; System.out.println(startTime + "//" + currentTime + "//" + finalTime);
         }
         if(key == KeyEvent.VK_W){
             isKeyCorrect = true;
@@ -428,26 +460,13 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             gameNumber = 2;
             game2UserInput.setText(game2UserInput.getText()+"D");
         }
+            
         if(isKeyCorrect){
-            boolean correct = checkAnswer(gameNumber, keyNumber);
-            
-            if(correct){
-                if(gameNumber == 1){
-                    if(!g1Questionnaire.nextQuestion()){
-                        isG1End = true;
-                    }
-                }else if(gameNumber == 2){
-                    if(!g2Questionnaire.nextQuestion()){
-                        isG2End = true;
-                    }
-                }else if(gameNumber == 3){
-                    if(!g3Questionnaire.nextQuestion()){
-                        isG3End = true;
-                    }
-                }
+            if(((gameNumber == 1)&&(isG1End == false))||
+               ((gameNumber == 2)&&(isG2End == false))||
+               ((gameNumber == 3)&&(isG3End == false))){
+                processKeys(gameNumber, keyNumber);
             }
-            
-            updateQuestionPanel();
         }
     }
     
