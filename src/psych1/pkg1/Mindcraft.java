@@ -70,7 +70,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     
     private JLabel game2Title = new JLabel("GAME 2", JLabel.CENTER);
     private JLabel game2Pattern = new JLabel("WADSWSDAW", JLabel.CENTER);
-    private JLabel game2UserInput = new JLabel("WADS", JLabel.CENTER);
+    private JLabel game2UserInput = new JLabel("", JLabel.CENTER);
     
     private JLabel game3Title = new JLabel("GAME 3", JLabel.CENTER);
     private JLabel game3Shape = new JLabel("SHAPE", JLabel.CENTER);
@@ -247,7 +247,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 tempQArray = questionList.toArray(tempQArray);
                 tempCArray = correctAnsList.toArray(tempCArray);
                 tempWArray = wrongAnsList.toArray(tempWArray);
-
+                
                 //adds Questionnaire to arraylist
                 masterList.add(new Questionnaire(tempQArray,tempCArray,tempWArray));
                 reader.close();
@@ -297,26 +297,30 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     
     //Gets the next question and displays it
     private void updateQuestionPanel(){
-
+            
             //game 1
-            String[] tempCArray = g1Questionnaire.getCurChoices();
+            String[] temp1Array = g1Questionnaire.getCurChoices();
             game1Question.setText("<html>Question:  "+ g1Questionnaire.getCurQuestion() +"<br><br/>"+"</html>");
-            game1OptionR.setText(tempCArray[0]);
-            game1OptionL.setText(tempCArray[1]);
+            game1OptionR.setText(temp1Array[0]);
+            game1OptionL.setText(temp1Array[1]);
             
             //game 2
             game2Pattern.setText(g2Questionnaire.getCurQuestion());
             
             //game 3
-            game3Shape.setText("");
-            game3Shape.setIcon(new ImageIcon(g3Questionnaire.getCurQuestion()));
+            String []temp3Array = g3Questionnaire.getCurChoices();
+            game3Shape.setText(Arrays.toString(g3Questionnaire.getCurChoices()));
+            game3Shape.setIcon(new ImageIcon(Arrays.toString(g3Questionnaire.getCurChoices())));
+            
         
     }
     
-
-    
-    private boolean checkAnswer(int i, int a){
+    public void screenFlicker () {
+        //Dito yung pagpalit ng red for a frame nung screen
         
+    }    
+    private boolean checkAnswer(int i, int a){
+        System.out.println("Reached checkAnswer"+ i + a);
         boolean correct = false;
         if(i == 1){
             if(a == g1Questionnaire.getCurCorrectChoiceIndex())
@@ -379,7 +383,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         int gameNumber = 0;
         int keyNumber = 0;
         int key = e.getKeyCode();
-                                      
+        
         if(key == KeyEvent.VK_LEFT){
             isKeyCorrect = true;
             keyNumber = 1;
@@ -393,35 +397,35 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         if(key == KeyEvent.VK_UP){
             isKeyCorrect = true;
             keyNumber = 1;
-            gameNumber = 2;
+            gameNumber = 3;
         }
         if(key == KeyEvent.VK_DOWN){
             isKeyCorrect = true;
             keyNumber = 2;
-            gameNumber = 2;
+            gameNumber = 3;
         }
         if(key == KeyEvent.VK_W){
             isKeyCorrect = true;
             keyNumber = 1;
-            gameNumber = 3;
+            gameNumber = 2;
             game2UserInput.setText(game2UserInput.getText()+"W");
         }
         if(key == KeyEvent.VK_A){
             isKeyCorrect = true;
             keyNumber = 2;
-            gameNumber = 3;
+            gameNumber = 2;
             game2UserInput.setText(game2UserInput.getText()+"A");
         }
         if(key == KeyEvent.VK_S){
             isKeyCorrect = true;
             keyNumber = 3;
-            gameNumber = 3;
+            gameNumber = 2;
             game2UserInput.setText(game2UserInput.getText()+"S");
         }
         if(key == KeyEvent.VK_D){
             isKeyCorrect = true;
             keyNumber = 4;
-            gameNumber = 3;
+            gameNumber = 2;
             game2UserInput.setText(game2UserInput.getText()+"D");
         }
         if(isKeyCorrect){
