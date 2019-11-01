@@ -50,7 +50,7 @@ public class Questionnaire{
         return getCorrectAnswer(getCurQuestionIndex());
     }
     
-    public String getCurWrongAnswer(){                                  //Not sure kung ito tinutukoy mo CJ na gawin kong "Answer" yung "Ans"
+    public String getCurWrongAnswer(){         
         return getWrongAnswer(getCurQuestionIndex());
     }
     
@@ -65,7 +65,7 @@ public class Questionnaire{
             selectQuestion();
         }
     }
-
+    
     public void selectChoices(int i){
         String[] choices;
         //Simplicity's sake; so that all answers are in one side for Game 1
@@ -97,8 +97,17 @@ public class Questionnaire{
         return qNum;
     }
     
-    public boolean nextQuestion(){
+//    public boolean nextQuestion(){
+//        if(!questionsSelected.isEmpty()){
+//            questionsSelected.remove(0);
+//            correctChoiceIndex.remove(0);
+//        }
+//        return !questionsSelected.isEmpty();
+//    }
+        
+        public boolean nextQuestion(){
         if(!questionsSelected.isEmpty()){
+            System.out.println(!questionsSelected.isEmpty()+"?");
             questionsSelected.remove(0);
             correctChoiceIndex.remove(0);
         }
