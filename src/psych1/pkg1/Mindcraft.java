@@ -305,6 +305,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 revalidate();
                 repaint();
             }
+            //To indicate that the games have been finished
             if((isG1End == true)&&(isG2End == true)&&(isG3End == true))
                 isEnd = true;
         }
@@ -362,8 +363,6 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             gameWrongAns.setText("Wrong Answers: " + wrongAnsCount);
             if(isG1End == false){
             String[] temp1Array = g1Questionnaire.getCurChoices(g1ChoiceCounter);
-            System.out.println(g1ChoiceCounter);
-            System.out.println(Arrays.toString(temp1Array));
             game1Question.setText("<html>Question:  "+ g1Questionnaire.getCurQuestion() +"<br><br/>"+"</html>");
             game1OptionR.setText(temp1Array[1]);
             game1OptionL.setText(temp1Array[0]);
@@ -539,26 +538,13 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         if(key == KeyEvent.VK_U){
             updateQuestionPanel();
         }
+            
         if(isKeyCorrect){
-            boolean correct = checkAnswer(gameNumber, keyNumber);
-            
-            if(correct){
-                if(gameNumber == 1){
-                    if(!g1Questionnaire.nextQuestion()){
-                        isG1End = true;
-                    }
-                }else if(gameNumber == 2){
-                    if(!g2Questionnaire.nextQuestion()){
-                        isG2End = true;
-                    }
-                }else if(gameNumber == 3){
-                    if(!g3Questionnaire.nextQuestion()){
-                        isG3End = true;
-                    }
-                }
+            if(((gameNumber == 1)&&(isG1End == false))||
+               ((gameNumber == 2)&&(isG2End == false))||
+               ((gameNumber == 3)&&(isG3End == false))){
+                processKeys(gameNumber, keyNumber);
             }
-            
-            updateQuestionPanel();
         }
     }
     

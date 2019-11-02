@@ -38,7 +38,7 @@ public class Questionnaire{
     }
     
     public String[] getCurChoices(int i){
-        return questionsChoices.get(i);              
+        return questionsChoices.get(i);
     }
     
     public String getCurQuestion(){
@@ -49,7 +49,7 @@ public class Questionnaire{
         return getCorrectAnswer(getCurQuestionIndex());
     }
     
-    public String getCurWrongAnswer(){
+    public String getCurWrongAnswer(){                                  //Not sure kung ito tinutukoy mo CJ na gawin kong "Answer" yung "Ans"
         return getWrongAnswer(getCurQuestionIndex());
     }
     
