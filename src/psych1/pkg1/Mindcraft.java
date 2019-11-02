@@ -42,6 +42,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JPanel reviewerPanel = new JPanel();
     private JPanel gameInterface = new JPanel();
     private JPanel game1Panel = new JPanel();
+    private JPanel game1PanelL = new JPanel();
+    private JPanel game1PanelR = new JPanel();
     private JPanel game2Panel = new JPanel();
     private JPanel game3Panel = new JPanel();
     
@@ -61,7 +63,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JLabel instructionsTitle = new JLabel("INSTRUCTIONS", JLabel.CENTER);
     private JLabel reviewerTitle = new JLabel("REVIEWER", JLabel.CENTER);
     
-    private Font f = new Font("Helvetica",Font.BOLD,25);
+    private Font questionFont = new Font("Helvetica",Font.BOLD,25);
+    private Font optionFont = new Font("Helvetica",Font.BOLD,20);
     
     private JLabel game1Title = new JLabel("GAME 1", JLabel.CENTER);
     private JLabel game1Question = new JLabel("QUESTION: ", JLabel.CENTER);
@@ -74,7 +77,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     
     private JLabel game3Title = new JLabel("GAME 3", JLabel.CENTER);
     private JLabel game3Shape = new JLabel("SHAPE", JLabel.CENTER);
-    private JLabel gameTimer = new JLabel("Time (00 : 00)", JLabel.CENTER);
+    private JLabel game3Text = new JLabel("DESCRIPTION", JLabel.CENTER);
+    private JLabel gameWrongAns = new JLabel("", JLabel.CENTER);
         
     
     private Questionnaire g1Questionnaire;
@@ -85,7 +89,13 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private boolean isG1End = false;
     private boolean isG2End = false;
     private boolean isG3End = false;
-    private int wrongAnsCount;
+    private int g1Answered = 0;
+    private int g2Answered = 0;
+    private int g3Answered = 0;
+    private int g1ChoiceCounter = 0;
+    private int g2ChoiceCounter = 0;
+    private int g3ChoiceCounter = 0;
+    private int wrongAnsCount = 0;
     private int startTime;
     private int currentTime;
     private int finalTime;
@@ -150,17 +160,25 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     //Game Interface (Timer and Main Menu)
         gameInterface.setPreferredSize(new Dimension(1250, 30));
         gameInterface.setLayout(new BorderLayout());  
-        gameInterface.add(gameTimer, BorderLayout.CENTER);
+        gameInterface.add(gameWrongAns, BorderLayout.CENTER);
         gameInterface.add(startGameB, BorderLayout.WEST);
         
     //Game1 Panel
         game1Panel.setPreferredSize(new Dimension(1250, 310));
         game1Panel.setLayout(new BorderLayout());
-        game1Panel.add(game1Title, BorderLayout.CENTER);
+        game1PanelL.setPreferredSize(new Dimension(625, 155));
+        game1PanelL.setLayout(new BorderLayout());
+        game1PanelL.add(game1OptionL, BorderLayout.CENTER);
+        game1PanelR.setPreferredSize(new Dimension(625, 155));
+        game1PanelR.setLayout(new BorderLayout());
+        game1PanelR.add(game1OptionR, BorderLayout.CENTER);
+        game1Panel.add(game1PanelR, BorderLayout.EAST);
+        game1Panel.add(game1PanelL, BorderLayout.WEST);
+        game1Panel.add(game1Title, BorderLayout.NORTH);
         game1Panel.add(game1Question, BorderLayout.SOUTH);
-        game1Question.setFont (f);
-        game1Panel.add(game1OptionR, BorderLayout.EAST);
-        game1Panel.add(game1OptionL, BorderLayout.WEST);
+        game1Question.setFont (questionFont);
+        game1OptionR.setFont (optionFont);
+        game1OptionL.setFont (optionFont);
        /*
             DITO MO LAGAY COMPONENTS NG GAME 1       
         */
@@ -170,6 +188,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         game2Panel.setLayout(new BorderLayout());
         game2Panel.add(game2Title, BorderLayout.CENTER);
         game2Panel.add(game2Pattern, BorderLayout.NORTH);
+        game2Pattern.setFont (questionFont);
         game2Panel.add(game2UserInput, BorderLayout.SOUTH);
         /*
             DITO MO LAGAY COMPONENTS NG GAME 2        
@@ -180,6 +199,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         game3Panel.setLayout(new BorderLayout());
         game3Panel.add(game3Title, BorderLayout.NORTH);
         game3Panel.add(game3Shape,BorderLayout.CENTER);
+        game3Panel.add(game3Text, BorderLayout.SOUTH);
+        game3Text.setFont (optionFont);
         /*
             DITO MO LAGAY COMPONENTS NG GAME 3        
         */
@@ -240,7 +261,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                     questionList.add(split[0]);
                     correctAnsList.add(split[1]);
                     wrongAnsList.add(split[2]);
-                    System.out.println(split[0] + "  " + split[1] + "  " + split[2]);
+                    //System.out.println(split[0] + "  " + split[1] + "  " + split[2]);
                 }
                 //data structure change: ArrayList to Array
                 String[] tempQArray = new String[questionList.size()];
@@ -253,7 +274,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 //adds Questionnaire to arraylist
                 masterList.add(new Questionnaire(tempQArray,tempCArray,tempWArray));
                 reader.close();
-                
+                 
             }
         }catch(Exception e){
             System.out.println(e);
@@ -269,8 +290,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         gamePanel.requestFocusInWindow();
         resetGame();
         startTime = (int)System.currentTimeMillis()/1000;
-        int prevTime = startTime;
-        currentTime = (int)System.currentTimeMillis()/1000; System.out.println(startTime + "//" + currentTime);
+        //int prevTime = startTime;
+        //int currentTime;
         updateQuestionPanel();
         
         /*
@@ -295,12 +316,25 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         g1Questionnaire.resetQuestionnaire();
         g2Questionnaire.resetQuestionnaire();
         g3Questionnaire.resetQuestionnaire();
+        
+        g1Answered = 0;
+        g2Answered = 0;
+        g3Answered = 0;
+        
+        g1ChoiceCounter = 0;
+        g2ChoiceCounter = 0;
+        g3ChoiceCounter = 0;
+        
+        isG1End = false;
+        isG2End = false;
+        isG3End = false;
+        
     }
     
     private void processKeys(int gameNumber, int keyNumber){
         boolean correct = checkAnswer(gameNumber, keyNumber);
+
         if(correct){
-            System.out.println("PREDICTING AN ERROR");
             if(gameNumber == 1){
                 if(!g1Questionnaire.nextQuestion()){
                     isG1End = true;
@@ -309,6 +343,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                     game1OptionL.setText("");
                 }
             }else if(gameNumber == 2){
+                
                 if(!g2Questionnaire.nextQuestion()){
                     isG2End = true;
                 }
@@ -318,57 +353,104 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 }
             }
         }
-        
+
         updateQuestionPanel();
     }
     
     //Gets the next question and displays it
     private void updateQuestionPanel(){
-            
             //game 1
-            String[] temp1Array = g1Questionnaire.getCurChoices();
+            gameWrongAns.setText("Wrong Answers: " + wrongAnsCount);
+            if(isG1End == false){
+            String[] temp1Array = g1Questionnaire.getCurChoices(g1ChoiceCounter);
+            System.out.println(g1ChoiceCounter);
+            System.out.println(Arrays.toString(temp1Array));
             game1Question.setText("<html>Question:  "+ g1Questionnaire.getCurQuestion() +"<br><br/>"+"</html>");
             game1OptionR.setText(temp1Array[1]);
             game1OptionL.setText(temp1Array[0]);
-            System.out.println("THIS SHOULD BE THE CORRECT ANSWER: "+ g1Questionnaire.getCurCorrectAns());
-            
+            game1Title.setText("GAME 1: " + g1Answered + "/10");
+            } else if (isG1End == true){
+                game1Title.setText("GAME 1 FINISHED");
+                game1Question.setText("<html>"+ "GAME 1 FINISHED" +"<br><br/>"+"</html>");
+                game1OptionR.setText("GAME 1 FINISHED");
+                game1OptionL.setText("GAME 1 FINISHED");
+            }
             //game 2
-            game2Pattern.setText(g2Questionnaire.getCurQuestion());
-            
+            if(isG2End == false){
+            game2Pattern.setText("<html><br><br/>" + g2Questionnaire.getCurQuestion() + "</html>");
+            game2Title.setText("GAME 2: " + g2Answered + "/10");
+            } else if (isG2End == true){
+                game2Pattern.setText("<html>"+ "GAME 2 FINISHED" +"<br><br/>"+"</html>");
+                game2Title.setText("GAME 2 FINISHED");
+            }
             //game 3
-            String []temp3Array = g3Questionnaire.getCurChoices();
-            game3Shape.setText(Arrays.toString(g3Questionnaire.getCurChoices()));
-            game3Shape.setIcon(new ImageIcon(Arrays.toString(g3Questionnaire.getCurChoices())));
+            if(isG3End == false){
+            String []temp3Array = g3Questionnaire.getCurChoices(g3ChoiceCounter);
+            game3Title.setText("GAME 3: " + g3Answered + "/10");
+            game3Shape.setText(Arrays.toString(g3Questionnaire.getCurChoices(g3ChoiceCounter)));
+            } else if (isG3End == true){
+                game3Title.setText("GAME 3 FINISHED");
+                game3Shape.setText("<html>"+ "GAME 3 FINISHED" +"<br><br/>"+"</html>");
+                game3Text.setText("GAME 3 FINISHED");
+            }
             
-        
+            if(isG1End == true&&isG2End == true&&isG3End == true){
+                JFrame f = new JFrame();
+                currentTime = (int)System.currentTimeMillis()/1000;
+                int initialTime = currentTime - startTime;
+                int minutes = initialTime/60;
+                int seconds = initialTime%60;
+                int mistakes = wrongAnsCount*2;
+                finalScore = initialTime + mistakes;
+                
+                String score = "Your score: "+finalScore;
+                String time = "Your time: "+String.valueOf(minutes) + " minutes and " + String.valueOf(seconds) + "seconds";
+                JOptionPane.showMessageDialog(f,time+"\n"+score,"GAME ENDED!",JOptionPane.WARNING_MESSAGE);     
+            }
     }
-    
+     
     private boolean checkAnswer(int i, int a){
-        System.out.println(g1Questionnaire.getCurCorrectChoiceIndex());
-        System.out.println("Answer Checked: "+i+a);
         boolean correct = false;
         if(i == 1){
             if(a == g1Questionnaire.getCurCorrectChoiceIndex())
-                correct = true;
+                correct = true;    
+            if(g1Answered < 9&&correct == true){
+                g1Answered++;
+                g1ChoiceCounter++;
+                }else if (g1Answered == 9){
+                isG1End = true;
+                }else if (correct == false){
+                    wrongAnsCount++;
+                }
         }else if(i == 2){
-            System.out.println("REACHED IF STATEMENT");
             if(((a == 1)&&("W".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))
            ||((a == 2) && ("A".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))
            ||((a == 3) && ("S".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))
            ||((a == 4) && ("D".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))){
                 correct = true;
-                System.out.println("Correct answer");
-            } else {
-                System.out.println("Wrong answer");
-            }
+                if(g2Answered < 9&&correct == true){
+                g2Answered++;
+                }else if (g2Answered == 9){
+                isG2End = true;
+                }
+                }else if (correct == false){
+                wrongAnsCount++;
+                }
             
         }else if(i == 3){
-            if(((a == 1)&&(g3Questionnaire.getCurCorrectAns() == "true"))
-           ||((a == 2) && (g3Questionnaire.getCurCorrectAns() == "false"))){
+            if(((a == 1)&&("true".equals(g3Questionnaire.getCurCorrectAns())))
+           ||((a == 2) && ("false".equals(g3Questionnaire.getCurCorrectAns())))){
                 correct = true;
-            }
+                if(g3Answered < 9&&correct == true){
+                g3Answered++;
+                g3ChoiceCounter++;
+                }else if (g3Answered == 9){
+                isG3End = true;
+                }
+            }else if (correct == false){
+                wrongAnsCount++;
+                }
         }
-        System.out.println(correct);
         return correct;
     }
     
@@ -433,32 +515,30 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             isKeyCorrect = true;
             keyNumber = 2;
             gameNumber = 3;
-            finalTime = currentTime-startTime;
-            currentTime = (int)System.currentTimeMillis()/1000; System.out.println(startTime + "//" + currentTime + "//" + finalTime);
         }
         if(key == KeyEvent.VK_W){
             isKeyCorrect = true;
             keyNumber = 1;
             gameNumber = 2;
-            game2UserInput.setText(game2UserInput.getText()+"W");
         }
         if(key == KeyEvent.VK_A){
             isKeyCorrect = true;
             keyNumber = 2;
             gameNumber = 2;
-            game2UserInput.setText(game2UserInput.getText()+"A");
         }
         if(key == KeyEvent.VK_S){
             isKeyCorrect = true;
             keyNumber = 3;
             gameNumber = 2;
-            game2UserInput.setText(game2UserInput.getText()+"S");
         }
         if(key == KeyEvent.VK_D){
             isKeyCorrect = true;
             keyNumber = 4;
             gameNumber = 2;
-            game2UserInput.setText(game2UserInput.getText()+"D");
+        }
+        
+        if(key == KeyEvent.VK_U){
+            updateQuestionPanel();
         }
             
         if(isKeyCorrect){

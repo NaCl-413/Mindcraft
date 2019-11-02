@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 public class Questionnaire{
     //how many will be asked
-    private int numQuestions = 1;
-    
+    private int numQuestions = 12;
     private String[] questions;
     private String[] correctAns;
     private String[] wrongAns;
@@ -38,8 +37,8 @@ public class Questionnaire{
         return questionsSelected.get(0);
     }
     
-    public String[] getCurChoices(){
-        return questionsChoices.get(0);
+    public String[] getCurChoices(int i){
+        return questionsChoices.get(i);              
     }
     
     public String getCurQuestion(){
@@ -50,7 +49,7 @@ public class Questionnaire{
         return getCorrectAnswer(getCurQuestionIndex());
     }
     
-    public String getCurWrongAnswer(){         
+    public String getCurWrongAnswer(){
         return getWrongAnswer(getCurQuestionIndex());
     }
     
@@ -65,7 +64,7 @@ public class Questionnaire{
             selectQuestion();
         }
     }
-    
+
     public void selectChoices(int i){
         String[] choices;
         //Simplicity's sake; so that all answers are in one side for Game 1
@@ -97,17 +96,8 @@ public class Questionnaire{
         return qNum;
     }
     
-//    public boolean nextQuestion(){
-//        if(!questionsSelected.isEmpty()){
-//            questionsSelected.remove(0);
-//            correctChoiceIndex.remove(0);
-//        }
-//        return !questionsSelected.isEmpty();
-//    }
-        
-        public boolean nextQuestion(){
+    public boolean nextQuestion(){
         if(!questionsSelected.isEmpty()){
-            System.out.println(!questionsSelected.isEmpty()+"?");
             questionsSelected.remove(0);
             correctChoiceIndex.remove(0);
         }
