@@ -49,7 +49,7 @@ public class Questionnaire{
         return getCorrectAnswer(getCurQuestionIndex());
     }
     
-    public String getCurWrongAnswer(){                                  //Not sure kung ito tinutukoy mo CJ na gawin kong "Answer" yung "Ans"
+    public String getCurWrongAnswer(){
         return getWrongAnswer(getCurQuestionIndex());
     }
     
@@ -59,7 +59,9 @@ public class Questionnaire{
     
 //Init and in-game Methods
     public void resetQuestionnaire(){
+        questionsChoices.clear();
         questionsSelected.clear();
+        correctChoiceIndex.clear();
         for(int i = 0;i < numQuestions;i++){
             selectQuestion();
         }
