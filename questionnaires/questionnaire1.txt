@@ -1,8 +1,4 @@
-Psychology is the systematic, scientific study of behaviors, cognition, and what?%Affect%Thoughts
-What is the alternative name for Psychoanalytic Approach%Psychodynamic Approach%Psychosocial Approach 
-Which of these is a modern approach?%Behavioral%Behaviorism
-Who pioneered psychology?%Willhelm Wundt%William James
-Psychology is the systematic, scientific study of behaviors, cognition, and what?%Affect%Thoughts
+Psychology is the systematic, scientific study of behaviors, cognition, and what?%Thoughts%Affect
 What is the alternative name for Psychoanalytic Approach%Psychodynamic Approach%Psychosocial Approach 
 Which of these is a modern approach?%Behavioral%Behaviorism
 Who pioneered psychology?%Willhelm Wundt%William James
@@ -14,7 +10,7 @@ The brain has an unlimited capacity to repair%False%True
 Which receptor does salvia mimic?%Endorphins%Dopamine
 Which is not a function of glutamate?%Emotion%Learning
 The myelin sheath does what?%Insulate%Store Neurotransmitter
-Which sequence is correct?%Sensors > Afferent Neuron > Interneuron >Efferent Neuron%Sensors > Efferent Neuron > Interneuron >Afferent Neuron
+Which sequence is correct?%Sensors > Afferent Neuron > Interneuron%Sensors > Efferent Neuron > Interneuron
 Which part of the neuron conducts electrical signals to neurons/cells/organs?%Axon%Synapse
 Which image highlights the central nervous system?%cns.jpg%pns.jpg
 Which image highlights the peripheral nervous system?%pns.jpg%cns.jpg
@@ -24,5 +20,5 @@ Which part of the limbic system regulates motivational behaviors?%Hypothalamus.j
 The “PET” in a PET scan means?%Positron Emission Tomography%Proton Emission Tomography
 Which image highlights the occipital lobe?%occipital.jpg%temporal.jpg
 Which image highlights the frontal lobe?%frontal.jpg%parietal.jpg
-Which image shows an MRI scan?%mri.jpg%pet.jpg
+Which image shows an MRI scan?%game3//mri.jpg%game3//pet.jpg
 Which part of the endocrine system regulates water and salt balance?%Posterior pituitary gland%Anterior pituitary gland
