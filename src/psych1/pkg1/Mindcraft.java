@@ -56,7 +56,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JButton toAbout = new JButton("ABOUT");
     private JButton toInstructions = new JButton("INSTRUCTIONS");
     private JButton toReviewer = new JButton("REVIEWER");
-    private JButton startGameB = new JButton("START GAME");  //Tentative start button for the game
+    private JButton startGameB = new JButton("NEW GAME");  //Tentative start button for the game
 
     private JLabel mainTitle = new JLabel("MindCraft", JLabel.CENTER);
     private JLabel aboutTitle = new JLabel("ABOUT", JLabel.CENTER);
@@ -120,9 +120,9 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         mainMenuPanel.add(Box.createRigidArea(new Dimension(0,50)));
         mainMenuPanel.add(toGame);
         mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
-        mainMenuPanel.add(toAbout);
-        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
         mainMenuPanel.add(toInstructions);
+        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
+        mainMenuPanel.add(toAbout);
         mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
         mainMenuPanel.add(toReviewer);
         mainMenuPanel.add(Box.createRigidArea(new Dimension(0,65)));
@@ -207,7 +207,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         
     //Game Panel
         gamePanel.setPreferredSize(new Dimension(1280, 720));
-        gamePanel.setBackground(Color.gray);
+        gamePanel.setBackground(Color.BLACK);
         gamePanel.addKeyListener(this);
         gamePanel.add(gameInterface, BorderLayout.PAGE_START);
         gamePanel.add(game1Panel, BorderLayout.NORTH);
@@ -215,6 +215,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         gamePanel.add(game3Panel, BorderLayout.EAST);
         
     //Buttons Init
+        startGameB.addActionListener(this);
         toMainMenu.addActionListener(this);
         toGame.addActionListener(this);
         toAbout.addActionListener(this);
@@ -294,6 +295,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         //int currentTime;
         updateQuestionPanel();
         
+        
         /*
         while(!isEnd){
             currentTime = (int)System.currentTimeMillis()/1000;
@@ -316,10 +318,12 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         g1Questionnaire.resetQuestionnaire();
         g2Questionnaire.resetQuestionnaire();
         g3Questionnaire.resetQuestionnaire();
-        
+
         g1Answered = 0;
         g2Answered = 0;
         g3Answered = 0;
+        
+        wrongAnsCount = 0;
         
         g1ChoiceCounter = 0;
         g2ChoiceCounter = 0;
@@ -359,6 +363,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     
     //Gets the next question and displays it
     private void updateQuestionPanel(){
+        
+            System.out.println(g3Questionnaire.getCurWrongAnswer());
             //game 1
             gameWrongAns.setText("Wrong Answers: " + wrongAnsCount);
             if(isG1End == false){
@@ -383,9 +389,9 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             }
             //game 3
             if(isG3End == false){
-            String []temp3Array = g3Questionnaire.getCurChoices(g3ChoiceCounter);
             game3Title.setText("GAME 3: " + g3Answered + "/10");
-            game3Shape.setText(Arrays.toString(g3Questionnaire.getCurChoices(g3ChoiceCounter)));
+            game3Shape.setText(g3Questionnaire.getCurQuestion());
+            game3Text.setText(g3Questionnaire.getCurWrongAnswer());
             } else if (isG3End == true){
                 game3Title.setText("GAME 3 FINISHED");
                 game3Shape.setText("<html>"+ "GAME 3 FINISHED" +"<br><br/>"+"</html>");
@@ -405,6 +411,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 String time = "Your time: "+String.valueOf(minutes) + " minutes and " + String.valueOf(seconds) + "seconds";
                 JOptionPane.showMessageDialog(f,time+"\n"+score,"GAME ENDED!",JOptionPane.WARNING_MESSAGE);     
             }
+
     }
      
     private boolean checkAnswer(int i, int a){
@@ -455,6 +462,12 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     @Override
     public void actionPerformed(ActionEvent a) {
         JButton clicked = (JButton)a.getSource();
+        
+        if(clicked == startGameB) {
+            startGame();
+            System.out.println("REACHED START BUTTON");
+            
+        }else {
         remove(rightPanel);
 
         if(clicked == toGame){
@@ -481,6 +494,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 rightPanel = mainMenuPanel;
             }
             add(rightPanel);
+        }
+        
         }
         
         repaint();
