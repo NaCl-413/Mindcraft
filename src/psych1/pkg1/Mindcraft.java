@@ -64,19 +64,21 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JLabel reviewerTitle = new JLabel("REVIEWER", JLabel.CENTER);
     
     private Font questionFont = new Font("Helvetica",Font.BOLD,25);
-    private Font optionFont = new Font("Helvetica",Font.BOLD,20);
+    private Font optionFont = new Font("Helvetica",Font.BOLD,30);
+    private Font patternFont = new Font("Helvetica",Font.BOLD,50);
+    private Font gameNumFont = new Font("Helvetica",Font.BOLD,50);
     
     private JLabel game1Title = new JLabel("GAME 1", JLabel.CENTER);
     private JLabel game1Question = new JLabel("QUESTION: ", JLabel.CENTER);
-    private JLabel game1OptionR = new JLabel("OPTION RIGHT", JLabel.CENTER);
-    private JLabel game1OptionL = new JLabel("OPTION LEFT", JLabel.CENTER);
+    private JLabel game1OptionR = new JLabel("", JLabel.CENTER);
+    private JLabel game1OptionL = new JLabel("", JLabel.CENTER);
     
     private JLabel game2Title = new JLabel("GAME 2", JLabel.CENTER);
     private JLabel game2Pattern = new JLabel("WADSWSDAW", JLabel.CENTER);
     private JLabel game2UserInput = new JLabel("", JLabel.CENTER);
     
     private JLabel game3Title = new JLabel("GAME 3", JLabel.CENTER);
-    private JLabel game3Shape = new JLabel("SHAPE", JLabel.CENTER);
+    private JLabel game3Shape = new JLabel("", JLabel.CENTER);
     private JLabel game3Text = new JLabel("DESCRIPTION", JLabel.CENTER);
     private JLabel gameWrongAns = new JLabel("", JLabel.CENTER);
         
@@ -166,11 +168,14 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     //Game1 Panel
         game1Panel.setPreferredSize(new Dimension(1250, 310));
         game1Panel.setLayout(new BorderLayout());
+        game1Panel.setBackground(new Color(0,102,204));
         game1PanelL.setPreferredSize(new Dimension(625, 155));
         game1PanelL.setLayout(new BorderLayout());
+        game1PanelL.setBackground(new Color(0,102,204));
         game1PanelL.add(game1OptionL, BorderLayout.CENTER);
         game1PanelR.setPreferredSize(new Dimension(625, 155));
         game1PanelR.setLayout(new BorderLayout());
+        game1PanelR.setBackground(new Color(0,102,204));
         game1PanelR.add(game1OptionR, BorderLayout.CENTER);
         game1Panel.add(game1PanelR, BorderLayout.EAST);
         game1Panel.add(game1PanelL, BorderLayout.WEST);
@@ -186,9 +191,10 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     //Game2 Panel
         game2Panel.setPreferredSize(new Dimension(625, 310));
         game2Panel.setLayout(new BorderLayout());
+        game2Panel.setBackground(new Color(51,153,255));
         game2Panel.add(game2Title, BorderLayout.CENTER);
         game2Panel.add(game2Pattern, BorderLayout.NORTH);
-        game2Pattern.setFont (questionFont);
+        game2Pattern.setFont (patternFont);
         game2Panel.add(game2UserInput, BorderLayout.SOUTH);
         /*
             DITO MO LAGAY COMPONENTS NG GAME 2        
@@ -197,9 +203,10 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     //Game3 Panel
         game3Panel.setPreferredSize(new Dimension(625, 310));
         game3Panel.setLayout(new BorderLayout());
-        game3Panel.add(game3Title, BorderLayout.NORTH);
+        game3Panel.setBackground(new Color(0,128,255));
+        game3Panel.add(game3Title, BorderLayout.SOUTH);
         game3Panel.add(game3Shape,BorderLayout.CENTER);
-        game3Panel.add(game3Text, BorderLayout.SOUTH);
+        game3Panel.add(game3Text, BorderLayout.NORTH);
         game3Text.setFont (optionFont);
         /*
             DITO MO LAGAY COMPONENTS NG GAME 3        
@@ -370,8 +377,19 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             if(isG1End == false){
             String[] temp1Array = g1Questionnaire.getCurChoices(g1ChoiceCounter);
             game1Question.setText("<html>Question:  "+ g1Questionnaire.getCurQuestion() +"<br><br/>"+"</html>");
-            game1OptionR.setText(temp1Array[1]);
-            game1OptionL.setText(temp1Array[0]);
+            game1OptionR.setText("");
+            game1OptionL.setText("");
+            game1OptionR.setIcon(new ImageIcon());
+            game1OptionL.setIcon(new ImageIcon());
+                if(temp1Array[1].contains(".jpg")){
+                    System.out.println("HURRAH");
+                    game1OptionR.setIcon(new ImageIcon(temp1Array[1]));
+                    game1OptionL.setIcon(new ImageIcon(temp1Array[0]));
+                }else {
+                    System.out.println("HUNNAH");
+                    game1OptionR.setText(temp1Array[1]);
+                    game1OptionL.setText(temp1Array[0]);
+                }
             game1Title.setText("GAME 1: " + g1Answered + "/10");
             } else if (isG1End == true){
                 game1Title.setText("GAME 1 FINISHED");
@@ -381,7 +399,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             }
             //game 2
             if(isG2End == false){
-            game2Pattern.setText("<html><br><br/>" + g2Questionnaire.getCurQuestion() + "</html>");
+            game2Pattern.setText("<html>" + g2Questionnaire.getCurQuestion() + "</html>");
             game2Title.setText("GAME 2: " + g2Answered + "/10");
             } else if (isG2End == true){
                 game2Pattern.setText("<html>"+ "GAME 2 FINISHED" +"<br><br/>"+"</html>");
@@ -390,7 +408,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             //game 3
             if(isG3End == false){
             game3Title.setText("GAME 3: " + g3Answered + "/10");
-            game3Shape.setText(g3Questionnaire.getCurQuestion());
+            game3Shape.setIcon(new ImageIcon(g3Questionnaire.getCurQuestion()));
+            System.out.println(g3Questionnaire.getCurQuestion());
             game3Text.setText(g3Questionnaire.getCurWrongAnswer());
             } else if (isG3End == true){
                 game3Title.setText("GAME 3 FINISHED");
