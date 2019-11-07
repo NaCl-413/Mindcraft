@@ -1,1 +1,16 @@
-circle.jpeg%false%square
+game3//redCircle.jpg%true%CIRCLE
+game3//redCircle.jpg%false%SQUARE
+game3//redCircle.jpg%true%RED
+game3//redCircle.jpg%false%GREEN
+game3//greenCircle.jpg%true%CIRCLE
+game3//greenCircle.jpg%false%SQUARE
+game3//greenCircle.jpg%false%RED
+game3//greenCircle.jpg%true%GREEN
+game3//redSquare.jpg%false%CIRCLE
+game3//redSquare.jpg%true%SQUARE
+game3//redSquare.jpg%true%RED
+game3//redSquare.jpg%false%GREEN
+game3//greenSquare.jpg%false%CIRCLE
+game3//greenSquare.jpg%true%SQUARE
+game3//greenSquare.jpg%false%RED
+game3//greenSquare.jpg%true%GREEN
