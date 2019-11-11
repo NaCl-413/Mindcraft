@@ -58,15 +58,15 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JButton toReviewer = new JButton("REVIEWER");
     private JButton startGameB = new JButton("NEW GAME");  //Tentative start button for the game
 
-    private JLabel mainTitle = new JLabel("MindCraft", JLabel.CENTER);
+    private JLabel mainTitle = new JLabel("", JLabel.CENTER);
     private JLabel aboutTitle = new JLabel("ABOUT", JLabel.CENTER);
     private JLabel instructionsTitle = new JLabel("INSTRUCTIONS", JLabel.CENTER);
     private JLabel reviewerTitle = new JLabel("REVIEWER", JLabel.CENTER);
     
     private Font questionFont = new Font("Helvetica",Font.BOLD,25);
     private Font optionFont = new Font("Helvetica",Font.BOLD,30);
-    private Font patternFont = new Font("Helvetica",Font.BOLD,50);
-    private Font gameNumFont = new Font("Helvetica",Font.BOLD,50);
+    private Font patternFont = new Font("Helvetica",Font.BOLD,70);
+    private Font gameNumFont = new Font("Helvetica",Font.BOLD,35);
     
     private JLabel game1Title = new JLabel("GAME 1", JLabel.CENTER);
     private JLabel game1Question = new JLabel("QUESTION: ", JLabel.CENTER);
@@ -80,7 +80,11 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JLabel game3Title = new JLabel("GAME 3", JLabel.CENTER);
     private JLabel game3Shape = new JLabel("", JLabel.CENTER);
     private JLabel game3Text = new JLabel("DESCRIPTION", JLabel.CENTER);
-    private JLabel gameWrongAns = new JLabel("", JLabel.CENTER);
+    private JLabel gameWrongAnsCount = new JLabel("", JLabel.CENTER);
+    private JLabel gameWrongAns1 = new JLabel("", JLabel.CENTER);
+    private JLabel gameWrongAns2 = new JLabel("", JLabel.CENTER);
+    private JLabel gameWrongAns3 = new JLabel("", JLabel.CENTER);
+    
         
     
     private Questionnaire g1Questionnaire;
@@ -112,14 +116,14 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         titlePanel.setPreferredSize(new Dimension(590, 720));
         titlePanel.setBackground(Color.gray);
         titlePanel.setLayout(new BorderLayout());
-        mainTitle.setIcon(new ImageIcon("panelImage\\testTitlePanel.jpg"));
+        mainTitle.setIcon(new ImageIcon("game3//title2.jpg"));
         titlePanel.add(mainTitle, BorderLayout.CENTER);
         
     //Main Menu Panel
         mainMenuPanel.setPreferredSize(new Dimension(590, 720));
         mainMenuPanel.setBackground(Color.gray);
         mainMenuPanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.Y_AXIS));
-        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,50)));
+        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,50))); 
         mainMenuPanel.add(toGame);
         mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
         mainMenuPanel.add(toInstructions);
@@ -162,18 +166,21 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     //Game Interface (Timer and Main Menu)
         gameInterface.setPreferredSize(new Dimension(1250, 30));
         gameInterface.setLayout(new BorderLayout());  
-        gameInterface.add(gameWrongAns, BorderLayout.CENTER);
+        gameInterface.add(gameWrongAnsCount, BorderLayout.CENTER);
         gameInterface.add(startGameB, BorderLayout.WEST);
+        gameWrongAns1.setFont (questionFont);
+        gameWrongAns2.setFont (questionFont);
+        gameWrongAns3.setFont (questionFont);
         
     //Game1 Panel
         game1Panel.setPreferredSize(new Dimension(1250, 310));
         game1Panel.setLayout(new BorderLayout());
         game1Panel.setBackground(new Color(0,102,204));
-        game1PanelL.setPreferredSize(new Dimension(625, 155));
+        game1PanelL.setPreferredSize(new Dimension(500, 155));
         game1PanelL.setLayout(new BorderLayout());
         game1PanelL.setBackground(new Color(0,102,204));
         game1PanelL.add(game1OptionL, BorderLayout.CENTER);
-        game1PanelR.setPreferredSize(new Dimension(625, 155));
+        game1PanelR.setPreferredSize(new Dimension(500, 155));
         game1PanelR.setLayout(new BorderLayout());
         game1PanelR.setBackground(new Color(0,102,204));
         game1PanelR.add(game1OptionR, BorderLayout.CENTER);
@@ -181,6 +188,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         game1Panel.add(game1PanelL, BorderLayout.WEST);
         game1Panel.add(game1Title, BorderLayout.NORTH);
         game1Panel.add(game1Question, BorderLayout.SOUTH);
+        game1Panel.add(gameWrongAns1,BorderLayout.CENTER);
+        game1Title.setFont (gameNumFont);
         game1Question.setFont (questionFont);
         game1OptionR.setFont (optionFont);
         game1OptionL.setFont (optionFont);
@@ -192,9 +201,11 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         game2Panel.setPreferredSize(new Dimension(625, 310));
         game2Panel.setLayout(new BorderLayout());
         game2Panel.setBackground(new Color(51,153,255));
-        game2Panel.add(game2Title, BorderLayout.CENTER);
+        game2Panel.add(game2Title, BorderLayout.PAGE_END);
+        game2Title.setFont (gameNumFont);
         game2Panel.add(game2Pattern, BorderLayout.NORTH);
         game2Pattern.setFont (patternFont);
+        game2Panel.add(gameWrongAns2,BorderLayout.CENTER);
         game2Panel.add(game2UserInput, BorderLayout.SOUTH);
         /*
             DITO MO LAGAY COMPONENTS NG GAME 2        
@@ -207,6 +218,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         game3Panel.add(game3Title, BorderLayout.SOUTH);
         game3Panel.add(game3Shape,BorderLayout.CENTER);
         game3Panel.add(game3Text, BorderLayout.NORTH);
+        game3Title.setFont (gameNumFont);
         game3Text.setFont (optionFont);
         /*
             DITO MO LAGAY COMPONENTS NG GAME 3        
@@ -340,6 +352,11 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         isG2End = false;
         isG3End = false;
         
+        game3Shape.setText ("");
+        gameWrongAns1.setText ("");
+        gameWrongAns2.setText ("");
+        gameWrongAns3.setText ("");
+        
     }
     
     private void processKeys(int gameNumber, int keyNumber){
@@ -352,6 +369,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                     game1Question.setText("");
                     game1OptionR.setText("");
                     game1OptionL.setText("");
+                    game1OptionR.setIcon(new ImageIcon());
+                    game1OptionL.setIcon(new ImageIcon());
                 }
             }else if(gameNumber == 2){
                 
@@ -370,10 +389,9 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     
     //Gets the next question and displays it
     private void updateQuestionPanel(){
-        
-            System.out.println(g3Questionnaire.getCurWrongAnswer());
+            System.out.println(g1Answered);
             //game 1
-            gameWrongAns.setText("Wrong Answers: " + wrongAnsCount);
+            gameWrongAnsCount.setText("Wrong Answers: " + wrongAnsCount);
             if(isG1End == false){
             String[] temp1Array = g1Questionnaire.getCurChoices(g1ChoiceCounter);
             game1Question.setText("<html>Question:  "+ g1Questionnaire.getCurQuestion() +"<br><br/>"+"</html>");
@@ -382,13 +400,13 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             game1OptionR.setIcon(new ImageIcon());
             game1OptionL.setIcon(new ImageIcon());
                 if(temp1Array[1].contains(".jpg")){
-                    System.out.println("HURRAH");
                     game1OptionR.setIcon(new ImageIcon(temp1Array[1]));
                     game1OptionL.setIcon(new ImageIcon(temp1Array[0]));
                 }else {
-                    System.out.println("HUNNAH");
                     game1OptionR.setText(temp1Array[1]);
                     game1OptionL.setText(temp1Array[0]);
+                    game1OptionR.setIcon(new ImageIcon());
+                    game1OptionL.setIcon(new ImageIcon());
                 }
             game1Title.setText("GAME 1: " + g1Answered + "/10");
             } else if (isG1End == true){
@@ -412,9 +430,11 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             System.out.println(g3Questionnaire.getCurQuestion());
             game3Text.setText(g3Questionnaire.getCurWrongAnswer());
             } else if (isG3End == true){
+                game3Shape.setFont (questionFont);
                 game3Title.setText("GAME 3 FINISHED");
                 game3Shape.setText("<html>"+ "GAME 3 FINISHED" +"<br><br/>"+"</html>");
                 game3Text.setText("GAME 3 FINISHED");
+                game3Shape.setIcon(new ImageIcon());
             }
             
             if(isG1End == true&&isG2End == true&&isG3End == true){
@@ -436,15 +456,19 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private boolean checkAnswer(int i, int a){
         boolean correct = false;
         if(i == 1){
-            if(a == g1Questionnaire.getCurCorrectChoiceIndex())
+            if(a == g1Questionnaire.getCurCorrectChoiceIndex()){
                 correct = true;    
-            if(g1Answered < 9&&correct == true){
+            if(g1Answered < 9&&correct==true){
                 g1Answered++;
                 g1ChoiceCounter++;
-                }else if (g1Answered == 9){
+                gameWrongAns1.setText("");
+                }else if (g1Answered == 9&&correct==true){
                 isG1End = true;
-                }else if (correct == false){
+                gameWrongAns1.setText ("");
+                }
+            }else if (correct == false){
                     wrongAnsCount++;
+                    gameWrongAns1.setText("Wrong Answer!");
                 }
         }else if(i == 2){
             if(((a == 1)&&("W".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))
@@ -454,11 +478,13 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 correct = true;
                 if(g2Answered < 9&&correct == true){
                 g2Answered++;
+                gameWrongAns2.setText("");
                 }else if (g2Answered == 9){
                 isG2End = true;
                 }
                 }else if (correct == false){
                 wrongAnsCount++;
+                gameWrongAns2.setText("Wrong Answer!");
                 }
             
         }else if(i == 3){
@@ -483,9 +509,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         JButton clicked = (JButton)a.getSource();
         
         if(clicked == startGameB) {
-            startGame();
-            System.out.println("REACHED START BUTTON");
-            
+            startGame();          
         }else {
         remove(rightPanel);
 
@@ -497,7 +521,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         }else{
             //replaces rightPanel components to clicked button while titlePanel is the same
             remove(gamePanel);
-            titlePanel.setPreferredSize(new Dimension(400, 300));
+            titlePanel.setPreferredSize(new Dimension(200, 720));
             if(clicked == toAbout){
                 rightPanel = aboutPanel;
                 aboutPanel.add(toMainMenu, BorderLayout.PAGE_END);
