@@ -59,6 +59,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private JButton startGameB = new JButton("NEW GAME");  //Tentative start button for the game
 
     private JLabel mainTitle = new JLabel("", JLabel.CENTER);
+    private JLabel mainBackground = new JLabel("", JLabel.CENTER);
     private JLabel aboutTitle = new JLabel("ABOUT", JLabel.CENTER);
     private JLabel instructionsTitle = new JLabel("INSTRUCTIONS", JLabel.CENTER);
     private JLabel reviewerTitle = new JLabel("REVIEWER", JLabel.CENTER);
@@ -67,6 +68,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private Font optionFont = new Font("Helvetica",Font.BOLD,30);
     private Font patternFont = new Font("Helvetica",Font.BOLD,70);
     private Font gameNumFont = new Font("Helvetica",Font.BOLD,35);
+    private Font buttonFont1 = new Font("Arial",Font.BOLD,45);
+    private Font buttonFont2 = new Font("Arial",Font.BOLD,30);
     
     private JLabel game1Title = new JLabel("GAME 1", JLabel.CENTER);
     private JLabel game1Question = new JLabel("QUESTION: ", JLabel.CENTER);
@@ -114,28 +117,46 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     //Panel Initializations(Init)
     //Title Panel
         titlePanel.setPreferredSize(new Dimension(590, 720));
-        titlePanel.setBackground(Color.gray);
+        titlePanel.setBackground(Color.BLACK);
         titlePanel.setLayout(new BorderLayout());
-        mainTitle.setIcon(new ImageIcon("game3//title2.jpg"));
+        mainTitle.setIcon(new ImageIcon("game3//title1.jpg"));
+        mainBackground.setIcon(new ImageIcon("game3//title1.jpg"));
         titlePanel.add(mainTitle, BorderLayout.CENTER);
         
     //Main Menu Panel
+        Dimension maxSize = new Dimension(300, 100);
+        toGame.setMaximumSize(maxSize);
+        toInstructions.setMaximumSize(maxSize);
+        toAbout.setMaximumSize(maxSize);
+        toReviewer.setMaximumSize(maxSize);
+        toInstructions.setMaximumSize(maxSize);
+        toAbout.setMaximumSize(maxSize);
+        toReviewer.setMaximumSize(maxSize);
+        toGame.setFont(buttonFont1);
+        toInstructions.setFont(buttonFont2);
+        toAbout.setFont(buttonFont2);
+        toReviewer.setFont(buttonFont2);
+        toGame.setBackground(new Color(0,102,204));
+        toInstructions.setBackground(new Color(0,102,204));
+        toAbout.setBackground(new Color(0,102,204));
+        toReviewer.setBackground(new Color(0,102,204));
+        
         mainMenuPanel.setPreferredSize(new Dimension(590, 720));
-        mainMenuPanel.setBackground(Color.gray);
+        mainMenuPanel.setBackground(new Color(51,153,255));
         mainMenuPanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.Y_AXIS));
         mainMenuPanel.add(Box.createRigidArea(new Dimension(0,50))); 
         mainMenuPanel.add(toGame);
-        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
+        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,70)));
         mainMenuPanel.add(toInstructions);
-        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
+        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,70)));
         mainMenuPanel.add(toAbout);
-        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,130)));
+        mainMenuPanel.add(Box.createRigidArea(new Dimension(0,70)));
         mainMenuPanel.add(toReviewer);
         mainMenuPanel.add(Box.createRigidArea(new Dimension(0,65)));
 
         toGame.setAlignmentX(Component.CENTER_ALIGNMENT);
-        toAbout.setAlignmentX(Component.CENTER_ALIGNMENT);
         toInstructions.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toAbout.setAlignmentX(Component.CENTER_ALIGNMENT);
         toReviewer.setAlignmentX(Component.CENTER_ALIGNMENT);
         toGame.add(Box.createRigidArea(new Dimension(100,30)));
         toAbout.add(Box.createRigidArea(new Dimension(100,30)));
@@ -218,6 +239,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         game3Panel.add(game3Title, BorderLayout.SOUTH);
         game3Panel.add(game3Shape,BorderLayout.CENTER);
         game3Panel.add(game3Text, BorderLayout.NORTH);
+        game3Panel.add(gameWrongAns3,BorderLayout.EAST);
         game3Title.setFont (gameNumFont);
         game3Text.setFont (optionFont);
         /*
@@ -481,6 +503,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 gameWrongAns2.setText("");
                 }else if (g2Answered == 9){
                 isG2End = true;
+                gameWrongAns2.setText("");
                 }
                 }else if (correct == false){
                 wrongAnsCount++;
@@ -494,11 +517,14 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                 if(g3Answered < 9&&correct == true){
                 g3Answered++;
                 g3ChoiceCounter++;
+                gameWrongAns3.setText("");
                 }else if (g3Answered == 9){
                 isG3End = true;
+                gameWrongAns3.setText("");
                 }
             }else if (correct == false){
                 wrongAnsCount++;
+                gameWrongAns3.setText("<html>Wrong<br></br>Answer!</html>");
                 }
         }
         return correct;
@@ -525,15 +551,19 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             if(clicked == toAbout){
                 rightPanel = aboutPanel;
                 aboutPanel.add(toMainMenu, BorderLayout.PAGE_END);
+                mainTitle.setIcon(new ImageIcon("game3//title2.jpg"));
             }else if(clicked == toInstructions){
                 rightPanel = instructionsPanel;
                 instructionsPanel.add(toMainMenu, BorderLayout.PAGE_END);
+                mainTitle.setIcon(new ImageIcon("game3//title2.jpg"));
             }else if(clicked == toReviewer){
                 rightPanel = reviewerPanel;
                 reviewerPanel.add(toMainMenu, BorderLayout.PAGE_END);
+                mainTitle.setIcon(new ImageIcon("game3//title2.jpg"));
             }
             else if(clicked == toMainMenu){
-                titlePanel.setPreferredSize(new Dimension(590, 300));
+                titlePanel.setPreferredSize(new Dimension(590, 720));
+                mainTitle.setIcon(new ImageIcon("game3//title1.jpg"));
                 rightPanel = mainMenuPanel;
             }
             add(rightPanel);
