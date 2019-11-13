@@ -29,9 +29,9 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
     private String q2File = "questionnaires/questionnaire2.txt";
     private String q3File = "questionnaires/questionnaire3.txt";
     
-    private ImageIcon aboutImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
-    private ImageIcon instructionsImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
-    private ImageIcon reviewerImage = new ImageIcon("C:\\Users\\Gavin Nigel Chuacuco\\Desktop\\Desktop\\Screenshots\\longverticalpicforjava.jpg");
+    private ImageIcon aboutImage = new ImageIcon("game3//aboutInfo.jpg");
+    private ImageIcon instructionsImage = new ImageIcon("game3//instructionsInfo.jpg");
+    private ImageIcon reviewerImage = new ImageIcon("game3//reviewerInfo.jpg");
     
     private JPanel titlePanel = new JPanel();
     private JPanel rightPanel = new JPanel();
@@ -169,6 +169,8 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         aboutPanel.setLayout(new BorderLayout());
         aboutPanel.add(aboutTitle, BorderLayout.NORTH);
         aboutPanel.add(aboutPane,BorderLayout.CENTER);
+        aboutPane.setBackground(Color.black);
+        aboutTitle.setIcon(new ImageIcon("game3//about.jpg"));
         
     //Instructions Panel
         instructionsPanel.setPreferredSize(new Dimension(780, 720));
@@ -176,6 +178,9 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         instructionsPanel.setLayout(new BorderLayout());
         instructionsPanel.add(instructionsTitle, BorderLayout.NORTH);
         instructionsPanel.add(instructionsPane,BorderLayout.CENTER);
+        instructionsPane.setBackground(Color.black);
+        instructionsTitle.setIcon(new ImageIcon("game3//instructions.jpg"));
+        instructionsPane.setBackground(Color.black);
 
     //Reviewer Panel
         reviewerPanel.setPreferredSize(new Dimension(780, 720));
@@ -183,6 +188,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         reviewerPanel.setLayout(new BorderLayout());
         reviewerPanel.add(reviewerTitle, BorderLayout.NORTH);
         reviewerPanel.add(reviewerPane,BorderLayout.CENTER);
+        reviewerTitle.setIcon(new ImageIcon("game3//reviewer.jpg"));
         
     //Game Interface (Timer and Main Menu)
         gameInterface.setPreferredSize(new Dimension(1250, 30));
