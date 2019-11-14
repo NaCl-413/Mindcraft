@@ -436,7 +436,7 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
                     game1OptionR.setIcon(new ImageIcon());
                     game1OptionL.setIcon(new ImageIcon());
                 }
-            game1Title.setText("GAME 1: " + g1Answered + "/10");
+            game1Title.setText("GAME 1: " + g1Answered + "/15");
             } else if (isG1End == true){
                 game1Title.setText("GAME 1 FINISHED");
                 game1Question.setText("<html>"+ "GAME 1 FINISHED" +"<br><br/>"+"</html>");
@@ -446,14 +446,14 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             //game 2
             if(isG2End == false){
             game2Pattern.setText("<html>" + g2Questionnaire.getCurQuestion() + "</html>");
-            game2Title.setText("GAME 2: " + g2Answered + "/10");
+            game2Title.setText("GAME 2: " + g2Answered + "/15");
             } else if (isG2End == true){
                 game2Pattern.setText("<html>"+ "GAME 2 FINISHED" +"<br><br/>"+"</html>");
                 game2Title.setText("GAME 2 FINISHED");
             }
             //game 3
             if(isG3End == false){
-            game3Title.setText("GAME 3: " + g3Answered + "/10");
+            game3Title.setText("GAME 3: " + g3Answered + "/15");
             game3Shape.setIcon(new ImageIcon(g3Questionnaire.getCurQuestion()));
             System.out.println(g3Questionnaire.getCurQuestion());
             game3Text.setText(g3Questionnaire.getCurWrongAnswer());
@@ -486,11 +486,11 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
         if(i == 1){
             if(a == g1Questionnaire.getCurCorrectChoiceIndex()){
                 correct = true;    
-            if(g1Answered < 9&&correct==true){
+            if(g1Answered < 14&&correct==true){
                 g1Answered++;
                 g1ChoiceCounter++;
                 gameWrongAns1.setText("");
-                }else if (g1Answered == 9&&correct==true){
+                }else if (g1Answered == 14&&correct==true){
                 isG1End = true;
                 gameWrongAns1.setText ("");
                 }
@@ -504,10 +504,10 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
            ||((a == 3) && ("S".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))
            ||((a == 4) && ("D".equalsIgnoreCase(g2Questionnaire.getCurCorrectAns())))){
                 correct = true;
-                if(g2Answered < 9&&correct == true){
+                if(g2Answered < 14&&correct == true){
                 g2Answered++;
                 gameWrongAns2.setText("");
-                }else if (g2Answered == 9){
+                }else if (g2Answered == 14){
                 isG2End = true;
                 gameWrongAns2.setText("");
                 }
@@ -520,11 +520,11 @@ public class Mindcraft extends JFrame implements ActionListener, KeyListener{
             if(((a == 1)&&("true".equals(g3Questionnaire.getCurCorrectAns())))
            ||((a == 2) && ("false".equals(g3Questionnaire.getCurCorrectAns())))){
                 correct = true;
-                if(g3Answered < 9&&correct == true){
+                if(g3Answered < 14&&correct == true){
                 g3Answered++;
                 g3ChoiceCounter++;
                 gameWrongAns3.setText("");
-                }else if (g3Answered == 9){
+                }else if (g3Answered == 14){
                 isG3End = true;
                 gameWrongAns3.setText("");
                 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Questionnaire{
     //how many will be asked
-    private int numQuestions = 12;
+    private int numQuestions = 16;
     private String[] questions;
     private String[] correctAns;
     private String[] wrongAns;
